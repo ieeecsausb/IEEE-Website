@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ieee-orange: #FF6B35;
+  --color-ieee-white: #FFFFFF;
+  --color-ieee-warm-white: #FFF8F2;
+  --color-ieee-dark: #1E1E1E;
+  --color-ieee-dark-card: #2A2A2A;
+  --color-ieee-dark-accent: #3A3A3A;
+  --color-ieee-dark-input: #333333;
+  --color-ieee-light: #F5F5F5;
+
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+/* Default Theme (Light) */
+:root {
+  --bg-color: #FFF8F2;
+  --text-color: #2C2C2C;
+  --card-bg: #FFFFFF;
+}
+
+/* Dark Theme Override */
+:root.dark {
+  --bg-color: #1E1E1E;
+  --text-color: #FFFFFF;
+  --card-bg: #2A2A2A;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ieee-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ieee-orange);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e55a2b;
+}
+
+/* GSAP Utils */
+.invisible-on-load {
+  visibility: hidden;
+}
