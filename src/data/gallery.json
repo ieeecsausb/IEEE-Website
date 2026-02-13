@@ -1,0 +1,50 @@
+[
+    {
+        "id": "gal-001",
+        "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Tech Symposium 2024",
+        "category": "Events"
+    },
+    {
+        "id": "gal-002",
+        "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Hackathon Winners",
+        "category": "Awards"
+    },
+    {
+        "id": "gal-003",
+        "src": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Guest Lecture by Dr. Rao",
+        "category": "Events"
+    },
+    {
+        "id": "gal-004",
+        "src": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Team Outing",
+        "category": "Community"
+    },
+    {
+        "id": "gal-005",
+        "src": "https://images.unsplash.com/photo-1551818255-e6e10975bc17?auto=format&fit=crop&q=80&w=2073",
+        "alt": "Coding Workshop",
+        "category": "Events"
+    },
+    {
+        "id": "gal-006",
+        "src": "https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Best Student Branch Award",
+        "category": "Awards"
+    },
+    {
+        "id": "gal-007",
+        "src": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Study Jam",
+        "category": "Community"
+    },
+    {
+        "id": "gal-008",
+        "src": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=2070",
+        "alt": "Annual General Meeting",
+        "category": "Events"
+    }
+]

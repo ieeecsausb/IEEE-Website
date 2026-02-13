@@ -1,0 +1,74 @@
+[
+    {
+        "id": "evt-001",
+        "title": "Web Development Workshop",
+        "date": "2026-03-15",
+        "time": "10:00 AM - 4:00 PM",
+        "location": "Ada Lovelace Hall, CEG",
+        "category": "Workshop",
+        "description": "Master React & Next.js in this hands-on session. Learn the fundamentals of modern web development, from component-based architecture to server-side rendering.",
+        "imageGradient": "from-orange-400 to-red-500",
+        "registrationLink": "#",
+        "featured": true
+    },
+    {
+        "id": "evt-002",
+        "title": "AI/ML Bootcamp",
+        "date": "2026-04-05",
+        "time": "9:00 AM - 5:00 PM",
+        "location": "Turing Lab",
+        "category": "Bootcamp",
+        "description": "From theory to practice: Building your first model. Dive deep into neural networks, data preprocessing, and model deployment.",
+        "imageGradient": "from-blue-400 to-indigo-500",
+        "registrationLink": "#",
+        "featured": true
+    },
+    {
+        "id": "evt-003",
+        "title": "Hackathon 2026",
+        "date": "2026-05-20",
+        "time": "Start: 6:00 PM",
+        "location": "Main Auditorium",
+        "category": "Hackathon",
+        "description": "Code for impact in our annual 24-hour hackathon. themes include Sustainability, Healthcare, and FinTech. Prizes worth ₹50k!",
+        "imageGradient": "from-purple-400 to-pink-500",
+        "registrationLink": "#",
+        "featured": true
+    },
+    {
+        "id": "evt-004",
+        "title": "Industry Connect",
+        "date": "2026-06-10",
+        "time": "2:00 PM - 5:00 PM",
+        "location": "Virtual / Zoom",
+        "category": "Seminar",
+        "description": "Meet tech leaders and explore career opportunities. Speakers from Google, Microsoft, and top startups sharing their journey.",
+        "imageGradient": "from-green-400 to-teal-500",
+        "registrationLink": "#",
+        "featured": true
+    },
+    {
+        "id": "evt-005",
+        "title": "Intro to Cloud Computing",
+        "date": "2025-12-10",
+        "time": "10:00 AM - 1:00 PM",
+        "location": "CS Seminar Hall",
+        "category": "Workshop",
+        "description": "Understanding AWS and Azure basics. A beginner-friendly guide to cloud infrastructure and deployment.",
+        "imageGradient": "from-cyan-400 to-blue-500",
+        "registrationLink": "#",
+        "featured": false
+    },
+    {
+        "id": "evt-006",
+        "title": "Cybersecurity Awareness",
+        "date": "2025-11-05",
+        "time": "3:00 PM - 5:00 PM",
+        "location": "Online",
+        "category": "Webinar",
+        "description": "Protecting digital assets in the modern age. Learn about phishing, encryption, and safe online practices.",
+        "imageGradient": "from-red-500 to-pink-600",
+        "registrationLink": "#",
+        "featured": false
+    }
+]

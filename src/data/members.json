@@ -1,0 +1,83 @@
+[
+    {
+        "id": "mem-001",
+        "name": "Suresh Kumar",
+        "role": "President",
+        "bio": "Passionate about leadership and open source technologies. Leading the chapter to new heights.",
+        "socials": {
+            "linkedin": "#",
+            "github": "#",
+            "email": "mailto:president@ieeeauceg.org"
+        }
+    },
+    {
+        "id": "mem-002",
+        "name": "Priya Sharma",
+        "role": "Vice President",
+        "bio": "AI Enthusiast and community builder. Focused on bringing industry-relevant workshops to students.",
+        "socials": {
+            "linkedin": "#",
+            "email": "mailto:vp@ieeeauceg.org"
+        }
+    },
+    {
+        "id": "mem-003",
+        "name": "Rahul Verma",
+        "role": "Technical Lead",
+        "bio": "Full-stack developer and competitive programmer. Overseeing all technical projects and hackathons.",
+        "socials": {
+            "linkedin": "#",
+            "github": "#"
+        }
+    },
+    {
+        "id": "mem-004",
+        "name": "Anita Raj",
+        "role": "Design Lead",
+        "bio": "UI/UX Designer with a knack for creating intuitive and beautiful digital experiences.",
+        "socials": {
+            "linkedin": "#",
+            "instagram": "#"
+        }
+    },
+    {
+        "id": "mem-005",
+        "name": "Arun Patel",
+        "role": "Events Coordinator",
+        "bio": "Master organizer ensuring every event runs smoothly from start to finish.",
+        "socials": {
+            "linkedin": "#",
+            "email": "mailto:events@ieeeauceg.org"
+        }
+    },
+    {
+        "id": "mem-006",
+        "name": "Meera Nair",
+        "role": "PR & Marketing",
+        "bio": "Storyteller and social media strategist. Spreading the word about our initiatives.",
+        "socials": {
+            "linkedin": "#",
+            "instagram": "#"
+        }
+    },
+    {
+        "id": "mem-007",
+        "name": "Vikram Singh",
+        "role": "Content Lead",
+        "bio": "Tech writer and editor. Curating high-quality content for our newsletters and blog.",
+        "socials": {
+            "linkedin": "#",
+            "github": "#"
+        }
+    },
+    {
+        "id": "mem-008",
+        "name": "Anjali Gupta",
+        "role": "Treasurer",
+        "bio": "Finance wizard keeping our accounts in check and ensuring sustainable operations.",
+        "socials": {
+            "linkedin": "#",
+            "email": "mailto:treasurer@ieeeauceg.org"
+        }
+    }
+]
