@@ -61,3 +61,20 @@ body {
 .invisible-on-load {
   visibility: hidden;
 }
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* GPU Acceleration for animated containers */
+[ref], .hero-content, section {
+  will-change: auto;
+}
+
+/* Reduce paint cost on large blurred blobs */
+.animate-blob {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

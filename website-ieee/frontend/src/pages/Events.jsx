@@ -5,9 +5,9 @@ const Events = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(containerRef.current.children,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
+        gsap.fromTo(containerRef.current,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
         );
     }, []);
 

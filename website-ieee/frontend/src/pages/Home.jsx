@@ -18,14 +18,14 @@ const Home = () => {
 
         // Sleek Logo Reveal - smooth scale with gentle ease
         tl.fromTo(logoRef.current,
-            { scale: 0.6, opacity: 0, filter: "blur(12px)" },
-            { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.6, ease: "expo.out" }
+            { scale: 0.8, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 1.2, ease: "expo.out" }
         )
             // Text reveals with a smooth cascade
             .fromTo(textRef.current.children,
-                { y: 30, opacity: 0, filter: "blur(6px)" },
-                { y: 0, opacity: 1, filter: "blur(0px)", stagger: 0.12, duration: 1.2, ease: "power2.out" },
-                "-=0.9"
+                { y: 24, opacity: 0 },
+                { y: 0, opacity: 1, stagger: 0.1, duration: 0.9, ease: "power2.out" },
+                "-=0.6"
             )
             // CTA buttons fade in softly
             .fromTo(heroRef.current.querySelector('.hero-content'),
@@ -36,13 +36,12 @@ const Home = () => {
 
         // Stats Animation - smoother
         gsap.fromTo(
-            statsRef.current.children,
-            { opacity: 0, y: 30 },
+            statsRef.current,
+            { opacity: 0, y: 24 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.9,
-                stagger: 0.12,
+                duration: 0.7,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: statsRef.current,
