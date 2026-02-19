@@ -5,19 +5,20 @@ const Events = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(containerRef.current.children,
+        gsap.fromTo(
+            containerRef.current,
             { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power3.out", delay: 0 }
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
         );
     }, []);
 
     return (
         <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24" ref={containerRef}>
                 <h1 className="text-4xl font-bold text-ieee-orange mb-8 text-center">Upcoming Events</h1>
-                <div className="space-y-8" ref={containerRef}>
+                <div className="space-y-8">
                     {[1, 2, 3].map((event) => (
-                        <div key={event} className="group relative flex flex-col md:flex-row bg-white dark:bg-ieee-dark-card rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transform hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-orange-900/20">
+                        <div key={event} className="group relative flex flex-col md:flex-row bg-white dark:bg-ieee-dark-card rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transform hover:-translate-y-1 transition-[transform,box-shadow] duration-300 border border-gray-100 dark:border-orange-900/20">
                             <div className="md:w-1/3 bg-gray-200 dark:bg-ieee-dark-accent h-48 md:h-auto flex items-center justify-center text-gray-400 dark:text-gray-500 overflow-hidden">
                                 <span className="transform group-hover:scale-110 transition-transform duration-500">Event Image</span>
                             </div>
@@ -34,7 +35,7 @@ const Events = () => {
                                         <span className="flex items-center gap-1">📅 Oct 25, 2023</span>
                                         <span className="flex items-center gap-1">📍 Main Auditorium</span>
                                     </div>
-                                    <button className="px-6 py-2 bg-ieee-orange text-white rounded-full font-bold hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg transform hover:scale-105">Register Now</button>
+                                    <button className="px-6 py-2 bg-ieee-orange text-white rounded-full font-bold hover:bg-opacity-90 transition-opacity shadow-md hover:shadow-lg transform hover:scale-105">Register Now</button>
                                 </div>
                             </div>
                         </div>

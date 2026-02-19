@@ -37,8 +37,8 @@ const Home = () => {
 
         // Text reveals with a smooth cascade
         tl.fromTo(textRef.current.children,
-            { y: 30, opacity: 0, filter: "blur(6px)" },
-            { y: 0, opacity: 1, filter: "blur(0px)", stagger: 0.12, duration: 1.2, ease: "power2.out" }
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.06, duration: 0.8, ease: "power2.out" }
         );
 
         // ── Parallax: hero image drifts upward as user scrolls down ──
@@ -55,13 +55,12 @@ const Home = () => {
 
         // Stats Animation - smoother
         gsap.fromTo(
-            statsRef.current.children,
+            statsRef.current,
             { opacity: 0, y: 30 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.9,
-                stagger: 0.12,
+                duration: 0.7,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: statsRef.current,
@@ -143,7 +142,7 @@ const Home = () => {
                             { label: 'Projects Built', value: '25+' },
                             { label: 'Legacy Years', value: '15' },
                         ].map((stat, index) => (
-                            <div key={index} className="p-6 bg-orange-50 dark:bg-ieee-dark-card rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-transparent hover:border-ieee-orange dark:hover:border-ieee-orange group">
+                            <div key={index} className="p-6 bg-orange-50 dark:bg-ieee-dark-card rounded-2xl shadow-sm hover:shadow-md transition-[box-shadow,border-color] duration-300 border border-transparent hover:border-ieee-orange dark:hover:border-ieee-orange group">
                                 <div className="text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-2 group-hover:text-ieee-orange transition-colors">{stat.value}</div>
                                 <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
                             </div>

@@ -3,40 +3,60 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-ieee-orange: #FF6B35;
-  --color-ieee-white: #FFFFFF;
-  --color-ieee-warm-white: #FFF8F2;
-  --color-ieee-dark: #1E1E1E;
-  --color-ieee-dark-card: #2A2A2A;
-  --color-ieee-dark-accent: #3A3A3A;
+  --color-ieee-orange: #ff6b35;
+  --color-ieee-white: #ffffff;
+  --color-ieee-warm-white: #fff8f2;
+  --color-ieee-dark: #1e1e1e;
+  --color-ieee-dark-card: #2a2a2a;
+  --color-ieee-dark-accent: #3a3a3a;
   --color-ieee-dark-input: #333333;
-  --color-ieee-light: #F5F5F5;
+  --color-ieee-light: #f5f5f5;
 
-  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Default Theme (Light) */
 :root {
-  --bg-color: #FFF8F2;
-  --text-color: #2C2C2C;
-  --card-bg: #FFFFFF;
+  --bg-color: #fff8f2;
+  --text-color: #2c2c2c;
+  --card-bg: #ffffff;
 }
 
 /* Dark Theme Override */
 :root.dark {
-  --bg-color: #1E1E1E;
-  --text-color: #FFFFFF;
-  --card-bg: #2A2A2A;
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --card-bg: #2a2a2a;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* GPU-accelerated animated elements */
+.gsap-animated {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* Scrollbar Styling */
