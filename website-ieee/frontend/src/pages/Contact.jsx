@@ -25,21 +25,21 @@ const Contact = () => {
                                     <span className="text-2xl">📍</span>
                                     <div>
                                         <p className="font-bold">Location</p>
-                                        <p className="text-sm text-orange-100">Engineering Block, Room 101</p>
+                                        <p className="text-sm text-orange-100">Anna University, CEG Campus, Chennai - 600025</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <span className="text-2xl">📧</span>
                                     <div>
                                         <p className="font-bold">Email</p>
-                                        <p className="text-sm text-orange-100">contact@ieee-college.org</p>
+                                        <p className="text-sm text-orange-100">ieeecsausb@gmail.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <span className="text-2xl">🕒</span>
                                     <div>
-                                        <p className="font-bold">Meeting Times</p>
-                                        <p className="text-sm text-orange-100">Wednesdays, 5:00 PM</p>
+                                        <p className="font-bold">Office Hours</p>
+                                        <p className="text-sm text-orange-100">Mon – Fri, 10:00 AM – 5:00 PM</p>
                                     </div>
                                 </div>
                             </div>

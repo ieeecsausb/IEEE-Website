@@ -28,10 +28,9 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
                         <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                            <li>123 University Ave</li>
-                            <li>Engineering Block, Room 101</li>
-                            <li>contact@ieee-college.org</li>
-                            <li>+1 (234) 567-8900</li>
+                            <li>Anna University, CEG Campus</li>
+                            <li>Chennai - 600025</li>
+                            <li>ieeecsausb@gmail.com</li>
                         </ul>
                     </div>
 
@@ -52,7 +51,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 text-center text-gray-500 dark:text-gray-500 text-sm">
-                    &copy; {new Date().getFullYear()} IEEE College Chapter. All rights reserved.
+                    &copy; {new Date().getFullYear()} IEEE CS Anna University Student Branch. All rights reserved.
                 </div>
             </div>
         </footer>

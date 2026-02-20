@@ -13,54 +13,14 @@ const Members = () => {
   }, []);
 
   const members = [
-    {
-      id: 1,
-      name: "Alex Johnson",
-      role: "Chairperson",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      name: "Sarah Williams",
-      role: "Vice Chair",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      name: "Michael Brown",
-      role: "Secretary",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      role: "Treasurer",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 5,
-      name: "David Miller",
-      role: "Tech Lead",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 6,
-      name: "Jessica Wilson",
-      role: "Event Coordinator",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 7,
-      name: "Daniel Taylor",
-      role: "Web Master",
-      img: "https://via.placeholder.com/150",
-    },
-    {
-      id: 8,
-      name: "Laura Anderson",
-      role: "Design Lead",
-      img: "https://via.placeholder.com/150",
-    },
+    { id: 1, name: "Saul Goodman", role: "Chairperson", img: "https://via.placeholder.com/150" },
+    { id: 2, name: "Walter White", role: "Vice Chair", img: "https://via.placeholder.com/150" },
+    { id: 3, name: "Jesse Pinkman", role: "Secretary", img: "https://via.placeholder.com/150" },
+    { id: 4, name: "Mike Ehrmantraut", role: "Treasurer", img: "https://via.placeholder.com/150" },
+    { id: 5, name: "Gus Fring", role: "Tech Lead", img: "https://via.placeholder.com/150" },
+    { id: 6, name: "Kim Wexler", role: "Event Coordinator", img: "https://via.placeholder.com/150" },
+    { id: 7, name: "Hank Schrader", role: "Web Master", img: "https://via.placeholder.com/150" },
+    { id: 8, name: "Skyler White", role: "Design Lead", img: "https://via.placeholder.com/150" },
   ];
 
   return (

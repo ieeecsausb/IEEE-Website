@@ -137,10 +137,10 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" ref={statsRef}>
                         {[
-                            { label: 'Active Members', value: '500+' },
-                            { label: 'Yearly Events', value: '50+' },
-                            { label: 'Projects Built', value: '25+' },
-                            { label: 'Legacy Years', value: '15' },
+                            { label: 'Active Members', value: '40+' },
+                            { label: 'Yearly Events', value: '10+' },
+                            { label: 'Projects Done', value: '10+' },
+                            { label: 'Years Strong', value: '2' },
                         ].map((stat, index) => (
                             <div key={index} className="p-6 bg-orange-50 dark:bg-ieee-dark-card rounded-2xl shadow-sm hover:shadow-md transition-[box-shadow,border-color] duration-300 border border-transparent hover:border-ieee-orange dark:hover:border-ieee-orange group">
                                 <div className="text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-2 group-hover:text-ieee-orange transition-colors">{stat.value}</div>
@@ -164,7 +164,7 @@ const Home = () => {
                     </div>
                     <div className="w-full md:w-1/2" ref={aboutRef}>
                         <h4 className="text-ieee-orange font-bold uppercase tracking-wider mb-2">About Us</h4>
-                        <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-6 transition-colors duration-300">Innovating for Humanity</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-6 transition-colors duration-300">Building Tomorrow's Tech, Today</h2>
                         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed transition-colors duration-300">
                             The IEEE Computer Society Anna University Chapter is a vibrant community of innovators, thinkers, and builders. We bridge the gap between academic learning and industry demands through hands-on technical workshops, hackathons, and collaborative projects.
                         </p>
