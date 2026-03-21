@@ -137,7 +137,7 @@ const Home = () => {
             <section className="py-20 bg-orange-50/30 dark:bg-ieee-dark-card transition-colors duration-300">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h4 className="text-ieee-orange font-bold uppercase tracking-wider mb-2 text-center">Our Events</h4>
-                    <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-10 transition-colors duration-300 text-center">Highlights & Memories</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-10 transition-colors duration-300 text-center">The Journey So Far</h2>
                     <EventCarousel />
                 </div>
             </section>

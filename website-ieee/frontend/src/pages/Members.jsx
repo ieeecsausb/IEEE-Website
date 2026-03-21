@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 /* ── Data ───────────────────────────────────────────── */
@@ -54,7 +54,7 @@ const teams = [
     ],
   },
   {
-    label: "Operations & Logistics",
+    label: "Ops & Logistics",
     accent: "from-emerald-500 to-teal-400",
     members: [
       { name: "Member 1", role: "Ops Lead", img: "" },
@@ -120,6 +120,8 @@ const MemberCard = ({ name, role, img, large }) => (
 
 const Members = () => {
   const containerRef = useRef(null);
+  const gridRef = useRef(null);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     gsap.fromTo(
@@ -128,6 +130,26 @@ const Members = () => {
       { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
     );
   }, []);
+
+  // Animate cards in when tab changes
+  useEffect(() => {
+    if (!gridRef.current) return;
+    const cards = gridRef.current.children;
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 30, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        stagger: 0.07,
+        ease: "power3.out",
+      },
+    );
+  }, [activeTab]);
+
+  const activeTeam = teams[activeTab];
 
   return (
     <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300">
@@ -145,7 +167,7 @@ const Members = () => {
         </p>
 
         {/* ── Mentor ── */}
-        <section className="mb-20">
+        <section className="mb-16">
           <h2 className="text-2xl font-bold text-center mb-10 text-ieee-dark dark:text-ieee-white">
             <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-ieee-orange to-amber-500 text-white text-lg tracking-wide shadow-md">
               Mentor
@@ -161,26 +183,40 @@ const Members = () => {
           </div>
         </section>
 
-        {/* ── Team Sections ── */}
-        {teams.map((team) => (
-          <section key={team.label} className="mb-20">
-            <h2 className="text-2xl font-bold text-center mb-10 text-ieee-dark dark:text-ieee-white">
-              <span
-                className={`inline-block px-5 py-2 rounded-full bg-gradient-to-r ${team.accent} text-white text-lg tracking-wide shadow-md`}
-              >
-                {team.label}
-              </span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-              {team.members.map((m, i) => (
-                <MemberCard key={i} name={m.name} role={m.role} img={m.img} />
-              ))}
-            </div>
-          </section>
-        ))}
+        {/* ── Team Tab Bar ── */}
+        <nav className="flex flex-wrap justify-center gap-3 mb-14">
+          {teams.map((team, idx) => (
+            <button
+              key={team.label}
+              onClick={() => setActiveTab(idx)}
+              className={`px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer border-2 ${
+                activeTab === idx
+                  ? "bg-ieee-orange text-white border-transparent shadow-lg scale-105"
+                  : "bg-white dark:bg-ieee-dark-card text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-ieee-orange hover:text-ieee-orange dark:hover:border-ieee-orange dark:hover:text-ieee-orange"
+              }`}
+            >
+              {team.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* ── Active Team Members ── */}
+        <section>
+          <div
+            ref={gridRef}
+            className="flex flex-wrap justify-center gap-8"
+          >
+            {activeTeam.members.map((m, i) => (
+              <div key={`${activeTab}-${i}`} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
+                <MemberCard name={m.name} role={m.role} img={m.img} />
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
 };
 
 export default Members;
+
