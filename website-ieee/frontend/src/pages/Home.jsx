@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
-import ieeeLogo from '../assets/ieee-logo.png';
+import EventCarousel from '../components/EventCarousel';
 import teamHero from '../assets/team-hero.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,7 +28,6 @@ const Home = () => {
     const heroRef = useRef(null);
     const heroImgRef = useRef(null);
     const statsRef = useRef(null);
-    const aboutRef = useRef(null);
     const textRef = useRef(null);
 
     useEffect(() => {
@@ -69,21 +67,6 @@ const Home = () => {
             }
         );
 
-        // About Preview Animation - smoother
-        gsap.fromTo(
-            aboutRef.current,
-            { opacity: 0, x: -30 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 1.2,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: aboutRef.current,
-                    start: "top 80%",
-                },
-            }
-        );
     }, []);
 
     return (
@@ -150,29 +133,12 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-            {/* About Preview */}
+            {/* Events Carousel */}
             <section className="py-20 bg-orange-50/30 dark:bg-ieee-dark-card transition-colors duration-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-                    <div className="w-full md:w-1/2 h-80 bg-orange-100/60 dark:bg-ieee-dark-accent rounded-2xl flex items-center justify-center text-gray-500 dark:text-gray-400 font-bold text-xl relative overflow-hidden group transition-colors duration-300 shadow-lg">
-                        {/* Background Decor - Subtle warm gradient */}
-                        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-15 dark:opacity-10 pointer-events-none">
-                            <div className="absolute -top-[10%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-ieee-orange blur-[140px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
-                            <div className="absolute top-[50%] -left-[15%] w-[45vw] h-[45vw] rounded-full bg-orange-300 dark:bg-orange-600 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
-                            <div className="absolute -bottom-[10%] right-[20%] w-[35vw] h-[35vw] rounded-full bg-amber-200 dark:bg-orange-700 blur-[110px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-1/2" ref={aboutRef}>
-                        <h4 className="text-ieee-orange font-bold uppercase tracking-wider mb-2">About Us</h4>
-                        <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-6 transition-colors duration-300">Building Tomorrow's Tech, Today</h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed transition-colors duration-300">
-                            The IEEE Computer Society Anna University Chapter is a vibrant community of innovators, thinkers, and builders. We bridge the gap between academic learning and industry demands through hands-on technical workshops, hackathons, and collaborative projects.
-                        </p>
-                        <Link to="/about" className="text-ieee-dark dark:text-ieee-white font-bold hover:text-ieee-orange dark:hover:text-ieee-orange text-lg inline-flex items-center transition-colors">
-                            Discover Our Mission
-                            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </Link>
-                    </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h4 className="text-ieee-orange font-bold uppercase tracking-wider mb-2 text-center">Our Events</h4>
+                    <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-ieee-white mb-10 transition-colors duration-300 text-center">Highlights & Memories</h2>
+                    <EventCarousel />
                 </div>
             </section>
         </div>

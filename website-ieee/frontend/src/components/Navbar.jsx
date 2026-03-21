@@ -74,7 +74,7 @@ const Navbar = () => {
 
                     {/* ── Desktop Nav ──────────────────────────────── */}
                     <div className="hidden md:flex items-center space-x-8">
-                        {['Home', 'About', 'Members', 'Events', 'Projects', 'Contact'].map((item) => {
+                        {['Home', 'About', 'Members', 'Events', 'Contact'].map((item) => {
                             const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                             const isActive = location.pathname === path;
                             return (
