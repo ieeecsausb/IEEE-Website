@@ -1,12 +1,36 @@
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import ojas from "../assets/ojas.png";
+import shreem from "../assets/shreem.png";
+import shaan from "../assets/shaan.png";
+import hemanth from "../assets/hemanth.png";
+import sharmila from "../assets/sharmila.jpg";
+import kaushik from "../assets/kaushik.jpeg";
+import naraen from "../assets/naraen1.png";
+import akshaya from "../assets/akshaya.png";
+import lokesh from "../assets/lokesh.png";
+import saran from "../assets/saran.jpeg";
+import prannitha from "../assets/prannitha.png";
+import amitha from "../assets/amitha.jpeg";
+import kaaviya from "../assets/kaaviya.png";
+import preethi from "../assets/preethi.jpeg";
+import nimitha from "../assets/nimithashree.jpeg";
+import varshini from "../assets/varshini.jpeg";
+import tanvi from "../assets/tanvi.png";
+import harini from "../assets/harini.jpeg";
+import dhanush from "../assets/dhanush.png";
+import aadhi from "../assets/aadhi.png";
+import chandini from "../assets/chandini.png";
+import abhinav from "../assets/abhinav.png";
+import siva from "../assets/siva sanjay.jpeg";
+
 
 /* ── Data ───────────────────────────────────────────── */
 
 const mentor = {
   name: "Dr. Faculty Name",
   role: "Faculty Mentor",
-  img: "https://via.placeholder.com/150",
+  img: sharmila,
 };
 
 const teams = [
@@ -14,62 +38,62 @@ const teams = [
     label: "Executives",
     accent: "from-ieee-orange to-amber-500",
     members: [
-      { name: "Member 1", role: "Chairperson", img: "" },
+      { name: "Ojaskrisshnan", role: "Chairperson", img: ojas },
       { name: "Member 2", role: "Vice Chair", img: "" },
-      { name: "Member 3", role: "Secretary", img: "" },
-      { name: "Member 4", role: "Treasurer", img: "" },
-      { name: "Member 5", role: "Joint Secretary", img: "" },
+      { name: "Shreem Seth", role: "Secretary", img: shreem },
+      { name: "Hemananth R", role: "Treasurer", img: hemanth },
+      { name: "Shaan", role: "Joint Secretary", img: shaan },
     ],
   },
   {
     label: "Tech",
     accent: "from-blue-500 to-cyan-400",
     members: [
-      { name: "Member 1", role: "Tech Lead", img: "" },
-      { name: "Member 2", role: "Full Stack Dev", img: "" },
-      { name: "Member 3", role: "Backend Dev", img: "" },
-      { name: "Member 4", role: "Frontend Dev", img: "" },
-      { name: "Member 5", role: "ML Engineer", img: "" },
-      { name: "Member 6", role: "App Dev", img: "" },
+      { name: "Kaushik Kumar", role: "Tech Lead", img: kaushik },
+      { name: "Naraen", role: "Jr Head", img: naraen },
+      { name: "Lokesh Selvam", role: "Jr Head", img: lokesh },
+      { name: "Akshaya K", role: "Member", img: akshaya },
+      { name: "Saran Kumar", role: "Member", img: saran },
+      { name: "Prannitha", role: "Member", img: prannitha },
     ],
   },
   {
     label: "Design",
     accent: "from-pink-500 to-rose-400",
     members: [
-      { name: "Member 1", role: "Design Lead", img: "" },
-      { name: "Member 2", role: "UI/UX Designer", img: "" },
-      { name: "Member 3", role: "Graphic Designer", img: "" },
-      { name: "Member 4", role: "Motion Designer", img: "" },
-      { name: "Member 5", role: "Visual Designer", img: "" },
+      { name: "Amitha", role: "Head", img: amitha },
+      { name: "Kaaviya", role: "Head", img: kaaviya},
+      { name: "Preethi", role: "Jr Head", img: preethi },
+      { name: "NimithaShree", role: "Jr Head", img: nimitha},
+      { name: "Varshini", role: "Jr Head", img: varshini},
     ],
   },
   {
     label: "Media",
     accent: "from-violet-500 to-purple-400",
     members: [
-      { name: "Member 1", role: "Media Lead", img: "" },
-      { name: "Member 2", role: "Content Writer", img: "" },
-      { name: "Member 3", role: "Photographer", img: "" },
+      { name: "Tanvi Reddy", role: "Head", img: tanvi },
+      { name: "Sriharini S", role: "Jr Head", img: harini },
+      { name: "Dhanush S", role: "Member", img: dhanush },
     ],
   },
   {
     label: "Ops & Logistics",
     accent: "from-emerald-500 to-teal-400",
     members: [
-      { name: "Member 1", role: "Ops Lead", img: "" },
-      { name: "Member 2", role: "Logistics Coordinator", img: "" },
-      { name: "Member 3", role: "Volunteer Coordinator", img: "" },
+      { name: "Aadhisesha D", role: "Head", img: aadhi },
+      { name: "Chandini", role: "Jr Head", img: chandini },
+      { name: "Muhammed Sheik", role: "Jr Head", img: "" },
     ],
   },
   {
     label: "Events",
     accent: "from-yellow-500 to-orange-400",
     members: [
-      { name: "Member 1", role: "Events Lead", img: "" },
-      { name: "Member 2", role: "Event Coordinator", img: "" },
-      { name: "Member 3", role: "Event Planner", img: "" },
-      { name: "Member 4", role: "Event Manager", img: "" },
+      { name: "C.S>Abhinav", role: "Head", img: abhinav },
+      { name: "Abhishek S", role: " Head", img: "" },
+      { name: "Mohamed Jasim J", role: "Jr Head", img: "" },
+      { name: "Siva Sajay S", role: "Jr Head", img: siva },
     ],
   },
 ];
@@ -87,7 +111,7 @@ const MemberCard = ({ name, role, img, large }) => (
         <img
           src={img}
           alt={name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-center group-hover:scale-110 transition-transform duration-500"
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 text-5xl font-bold bg-gray-100 dark:bg-ieee-dark-card group-hover:scale-110 transition-transform duration-500">
