@@ -68,7 +68,7 @@ const Navbar = () => {
                         <img
                             src={currentLogo}
                             alt="IEEE CS Logo"
-                            className={`h-14 w-auto object-contain ${logoBlend}`}
+                            className={`h-16 w-auto object-contain ${logoBlend}`}
                         />
                     </Link>
 
@@ -156,8 +156,8 @@ const Navbar = () => {
                                     key={item}
                                     to={path}
                                     className={`block px-3 py-2 rounded-md text-base font-medium ${isActive
-                                            ? 'text-orange-500'
-                                            : `${textColor} ${hoverColor}`
+                                        ? 'text-orange-500'
+                                        : `${textColor} ${hoverColor}`
                                         }`}
                                 >
                                     {item}
