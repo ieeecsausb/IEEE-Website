@@ -1,78 +1,67 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import empoweringinnovation from '../assets/prev-events/empowering_innovation_through_ieee.png';
+import ieeejourney from '../assets/prev-events/IEEE&Your_Journey.png';
+import neurons_in_silicon from '../assets/prev-events/neurons-in-silicon.png';
+import neonova_25 from '../assets/prev-events/neonova_2025.png';
+import codesprint1 from '../assets/prev-events/codesprint1.png';
+import codesprint2 from '../assets/prev-events/codesprint2.png';
+import blockchain_webinar from '../assets/prev-events/blockchain_webinar.png';
 
 const events = [
   {
-    title: 'HackForge 2025',
+    title: 'WEBINAR ON Empowering Innovation Through IEEE: Membership Benefits & Opportunities',
     images: [
-      'https://picsum.photos/seed/ieee1a/900/600',
-      'https://picsum.photos/seed/ieee1b/900/600',
-      'https://picsum.photos/seed/ieee1c/900/600',
+      empoweringinnovation,
+      empoweringinnovation,
+      empoweringinnovation
     ],
-    desc: 'A 24-hour hackathon bringing together 200+ participants from across the region to build innovative solutions for real-world problems. Teams competed in categories including HealthTech, EdTech, and Sustainability.',
+    desc: 'The webinar took place on January 25, 2025.It highlighted membership benefits like networking on IEEE Collabratec, professional publication access, and career enhancement opportunities.The session also detailed student resources including volunteering roles, project funding, travel grants, technical competitions, and scholarships.',
   },
   {
-    title: 'AI/ML Workshop',
+    title: 'IEEE & Your Tech Journey: Unlocking Opportunities in Computing & Beyond',
     images: [
-      'https://picsum.photos/seed/ieee2a/900/600',
-      'https://picsum.photos/seed/ieee2b/900/600',
-      'https://picsum.photos/seed/ieee2c/900/600',
+      ieeejourney,
+      ieeejourney,
+      ieeejourney
     ],
-    desc: 'An intensive hands-on workshop that covered the fundamentals of deep learning, convolutional neural networks, and transformer architectures. Participants built and deployed their own image classifiers by the end of the session.',
+    desc: 'The session took place on February 18, 2025. The event featured a talk by Mr. Aravindhan Anbazhagan, Founder of Educelerator and IEEE ProComm Board of Governor. He shared personal experiences and detailed how IEEE membership offers exclusive access to journals, scholarships, and global networking',
   },
   {
-    title: 'WebDev Bootcamp',
+    title: 'WEBINAR ON “Neurons in Silicon"',
     images: [
-      'https://picsum.photos/seed/ieee3a/900/600',
-      'https://picsum.photos/seed/ieee3b/900/600',
-      'https://picsum.photos/seed/ieee3c/900/600',
+      neurons_in_silicon,
+      neurons_in_silicon,
+      neurons_in_silicon
     ],
-    desc: 'A full-stack web development bootcamp spanning two weekends. Attendees learned React, Node.js, and MongoDB while building a complete project from scratch with guided mentorship.',
+    desc: 'This webinar took place on April 10, 2025. It explores the intersection of neuroscience and technology, focusing on how biological principles inspire modern computing. Dr. Subhathirai S. P., an Assistant Professor at VIT Vellore, served as the guest speaker for this session. The presentation covered topics such as synaptic transmission, neuromorphic engineering, and silicon-based neuron circuits designed to mimic brain efficiency.',
   },
   {
-    title: 'Cloud Computing Seminar',
+    title: 'NEONOVA - AU IEEE Computer Society’s Ideathon',
     images: [
-      'https://picsum.photos/seed/ieee4a/900/600',
-      'https://picsum.photos/seed/ieee4b/900/600',
-      'https://picsum.photos/seed/ieee4c/900/600',
+      neonova_25,
+      neonova_25,
+      neonova_25
     ],
-    desc: 'Industry experts from leading cloud providers shared insights on modern cloud architectures, serverless computing, and best practices for deploying scalable applications on AWS, Azure, and GCP.',
+    desc: 'NEONOVA was held on March 22, 2025. The event aimed to foster innovation and problem-solving among students. Participants presented impactful solutions to real-world challenges across diverse domains, including healthcare, sustainability, and cybersecurity. Evaluated by industry alumni, teams were judged on innovation, feasibility, and the real-world relevance of their proposed approaches. The ideathon concluded with an impromptu round focused on bridging the gap between academia and industry employability',
   },
   {
-    title: 'CTF Challenge',
+    title: 'CodeSprint – “Think Fast. Code Faster.”',
     images: [
-      'https://picsum.photos/seed/ieee5a/900/600',
-      'https://picsum.photos/seed/ieee5b/900/600',
-      'https://picsum.photos/seed/ieee5c/900/600',
+      codesprint1,
+      codesprint2,
+      codesprint1
     ],
-    desc: 'A competitive Capture The Flag cybersecurity event with 50+ teams battling through challenges in cryptography, reverse engineering, web exploitation, and forensics.',
+    desc: 'CodeSprint was a high-energy virtual coding contest held on August 23, 2025. The event aimed to challenge students problem-solving skills under pressure. Participants competed individually on the HackerRank platform to efficiently solve various algorithmic challenges. Strict rules were enforced to ensure integrity, including a prohibition on using AI tools or external assistance. The top performers earned IEEE Computer Society memberships and qualified for the international IEEE Xtreme Coding Contest.',
   },
   {
-    title: 'Open Source Day',
+    title: 'Webinar on “Unveiling Blockchain: Its Purpose and Applications”',
     images: [
-      'https://picsum.photos/seed/ieee6a/900/600',
-      'https://picsum.photos/seed/ieee6b/900/600',
-      'https://picsum.photos/seed/ieee6c/900/600',
+      blockchain_webinar,
+      blockchain_webinar,
+      blockchain_webinar,
     ],
-    desc: 'A collaborative event where students contributed to real open-source projects under the guidance of experienced mentors. Over 100 pull requests were submitted across multiple repositories.',
-  },
-  {
-    title: 'Tech Talks Series',
-    images: [
-      'https://picsum.photos/seed/ieee7a/900/600',
-      'https://picsum.photos/seed/ieee7b/900/600',
-      'https://picsum.photos/seed/ieee7c/900/600',
-    ],
-    desc: 'A series of lightning talks delivered by students on cutting-edge topics including quantum computing, blockchain, edge AI, and the future of human-computer interaction.',
-  },
-  {
-    title: 'Annual Tech Fest',
-    images: [
-      'https://picsum.photos/seed/ieee8a/900/600',
-      'https://picsum.photos/seed/ieee8b/900/600',
-      'https://picsum.photos/seed/ieee8c/900/600',
-    ],
-    desc: 'Our flagship annual event featuring coding contests, technical workshops, keynote addresses from industry leaders, and a project showcase highlighting the best student innovations of the year.',
+    desc: 'The webinar was held on March 14, 2025. The featured speaker was Dr. Bhalaji N, a Senior Consultant at IITM Pravartak Technology Foundation, who provided expert insights into the technology\'s evolution. His presentation explored the progression from Web 1.0 to Web 3.0, the history of blockchain, and technical components like the SHA256 hashing algorithm. To provide practical understanding, the session included a live demonstration of blockchain in action followed by an interactive Q&A.',
   },
 ];
 

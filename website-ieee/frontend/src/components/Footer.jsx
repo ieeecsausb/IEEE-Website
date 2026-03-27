@@ -37,14 +37,11 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-ieee-dark-accent flex items-center justify-center shadow-sm hover:bg-ieee-orange dark:hover:bg-ieee-orange transition-colors group">
+                            <a href="https://www.linkedin.com/company/ieee-computer-society-au-ceg-student-branch/" className="w-10 h-10 rounded-full bg-white dark:bg-ieee-dark-accent flex items-center justify-center shadow-sm hover:bg-ieee-orange dark:hover:bg-ieee-orange transition-colors group">
                                 <span className="text-ieee-dark dark:text-white font-bold group-hover:text-white">in</span>
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-ieee-dark-accent flex items-center justify-center shadow-sm hover:bg-ieee-orange dark:hover:bg-ieee-orange transition-colors group">
+                            <a href="https://www.instagram.com/ieee.cs.ceg/" className="w-10 h-10 rounded-full bg-white dark:bg-ieee-dark-accent flex items-center justify-center shadow-sm hover:bg-ieee-orange dark:hover:bg-ieee-orange transition-colors group">
                                 <span className="text-ieee-dark dark:text-white font-bold group-hover:text-white">Ig</span>
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-ieee-dark-accent flex items-center justify-center shadow-sm hover:bg-ieee-orange dark:hover:bg-ieee-orange transition-colors group">
-                                <span className="text-ieee-dark dark:text-white font-bold group-hover:text-white">X</span>
                             </a>
                         </div>
                     </div>
