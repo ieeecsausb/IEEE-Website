@@ -31,7 +31,7 @@ import sheik from "../assets/sheik.png";
 /* ── Data ───────────────────────────────────────────── */
 
 const mentor = {
-  name: "Dr. Faculty Name",
+  name: "Dr. T Sree Sharmila",
   role: "Faculty Mentor",
   img: sharmila,
 };
@@ -41,11 +41,11 @@ const teams = [
     label: "Executives",
     accent: "from-ieee-orange to-amber-500",
     members: [
-      { name: "Ojaskrisshnan", role: "Chairperson", img: ojas },
+      { name: "Ojaskrisshnan", role: "Chairperson", img: ojas, objectPos: "object-contain" },
       { name: "Swayamprabha", role: "Vice Chair", img: swayam },
       { name: "Shreem Seth", role: "Secretary", img: shreem },
       { name: "Hemananth R", role: "Treasurer", img: hemanth },
-      { name: "Shaan", role: "Joint Secretary", img: shaan },
+      { name: "Shaan", role: "Joint Secretary", img: shaan, objectPos: "object-contain" },
     ],
   },
   {
@@ -76,8 +76,8 @@ const teams = [
     accent: "from-violet-500 to-purple-400",
     members: [
       { name: "Tanvi Reddy", role: "Head", img: tanvi },
-      { name: "Sriharini S", role: "Jr Head", img: harini },
-      { name: "Dhanush S", role: "Member", img: dhanush },
+      { name: "Sriharini S", role: "Jr Head", img: harini, objectPos: "object-contain" },
+      { name: "Dhanush S", role: "Member", img: dhanush, objectPos: "object-contain" },
     ],
   },
   {
@@ -93,7 +93,7 @@ const teams = [
     label: "Events",
     accent: "from-yellow-500 to-orange-400",
     members: [
-      { name: "C.S>Abhinav", role: "Head", img: abhinav },
+      { name: "C.S. Abhinav", role: "Head", img: abhinav },
       { name: "Abhishek S", role: " Head", img: "" },
       { name: "Mohamed Jasim J", role: "Jr Head", img: "" },
       { name: "Siva Sajay S", role: "Jr Head", img: siva },
@@ -103,7 +103,7 @@ const teams = [
 
 /* ── Card Component ─────────────────────────────────── */
 
-const MemberCard = ({ name, role, img, large }) => (
+const MemberCard = ({ name, role, img, large, objectPos = "object-cover object-top" }) => (
   <div
     className={`group relative bg-white dark:bg-ieee-dark-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-[transform,box-shadow] duration-300 transform hover:-translate-y-2 w-full ${large ? "max-w-md mx-auto" : ""}`}
   >
@@ -114,7 +114,7 @@ const MemberCard = ({ name, role, img, large }) => (
         <img
           src={img}
           alt={name}
-          className="w-full h-full object-center group-hover:scale-110 transition-transform duration-500"
+          className={`w-full h-full ${objectPos} group-hover:scale-110 transition-transform duration-500`}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 text-5xl font-bold bg-gray-100 dark:bg-ieee-dark-card group-hover:scale-110 transition-transform duration-500">
@@ -205,6 +205,7 @@ const Members = () => {
               name={mentor.name}
               role={mentor.role}
               img={mentor.img}
+              objectPos={mentor.objectPos}
               large
             />
           </div>
@@ -234,7 +235,7 @@ const Members = () => {
           >
             {activeTeam.members.map((m, i) => (
               <div key={`${activeTab}-${i}`} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
-                <MemberCard name={m.name} role={m.role} img={m.img} />
+                <MemberCard name={m.name} role={m.role} img={m.img} objectPos={m.objectPos} />
               </div>
             ))}
           </div>
