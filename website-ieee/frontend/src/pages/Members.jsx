@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ojas from "../assets/ojas.png";
 import shreem from "../assets/shreem.png";
 import shaan from "../assets/shaan.png";
@@ -27,7 +28,7 @@ import siva from "../assets/siva sanjay.jpeg";
 import swayam from "../assets/swayam.png";
 import sheik from "../assets/sheik.png";
 
-
+gsap.registerPlugin(ScrollTrigger);
 
 /* ── Data ───────────────────────────────────────────── */
 
@@ -154,11 +155,23 @@ const Members = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".fade-up",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+          }
+        }
+      );
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
   // Animate cards in when tab changes
@@ -182,22 +195,28 @@ const Members = () => {
   const activeTeam = teams[activeTab];
 
   return (
-    <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300">
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
-        ref={containerRef}
-      >
-        {/* Page Header */}
-        <h1 className="text-5xl font-bold text-center mb-4 text-ieee-dark dark:text-ieee-white">
-          Meet The <span className="text-ieee-orange">Team</span>
-        </h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto text-lg">
-          The passionate individuals driving innovation and community at IEEE CS
-          AU.
-        </p>
+    <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300" ref={containerRef}>
+
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-ieee-dark py-24 md:py-32 shadow-xl">
+        {/* Subtle glowing background orbs */}
+        <div className="absolute top-[-50%] right-[-10%] w-[80%] h-[200%] bg-ieee-orange rounded-full filter blur-[150px] opacity-[0.04] pointer-events-none"></div>
+        <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[100%] bg-blue-500 rounded-full filter blur-[120px] opacity-[0.03] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center fade-up mt-10 md:mt-0">
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
+            Meet The <span className="text-transparent bg-clip-text bg-gradient-to-r from-ieee-orange to-orange-400">Team</span>
+          </h1>
+          <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+            The passionate individuals driving innovation and community at IEEE CS AU.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
 
         {/* ── Mentor ── */}
-        <section className="mb-16">
+        <section className="mb-16 fade-up">
           <h2 className="text-2xl font-bold text-center mb-10 text-ieee-dark dark:text-ieee-white">
             <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-ieee-orange to-amber-500 text-white text-lg tracking-wide shadow-md">
               Mentor
@@ -216,16 +235,15 @@ const Members = () => {
         </section>
 
         {/* ── Team Tab Bar ── */}
-        <nav className="flex flex-wrap justify-center gap-2 mb-14">
+        <nav className="flex flex-wrap justify-center gap-2 mb-14 fade-up">
           {teams.map((team, idx) => (
             <button
               key={team.label}
               onClick={() => setActiveTab(idx)}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${
-                activeTab === idx
+              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${activeTab === idx
                   ? "bg-ieee-orange text-white shadow-lg shadow-ieee-orange/30 scale-105"
                   : "bg-white/5 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-ieee-orange hover:bg-ieee-orange/10 border border-gray-200/30 dark:border-white/10"
-              }`}
+                }`}
             >
               {team.label}
               {activeTab === idx && (
@@ -236,7 +254,7 @@ const Members = () => {
         </nav>
 
         {/* ── Active Team Members ── */}
-        <section>
+        <section className="fade-up">
           <div
             ref={gridRef}
             className="flex flex-wrap justify-center gap-8"
@@ -254,4 +272,5 @@ const Members = () => {
 };
 
 export default Members;
+
 

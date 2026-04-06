@@ -1,5 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
     const containerRef = useRef(null);
@@ -7,32 +10,47 @@ const Contact = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.fromTo(".fade-up", 
-                { opacity: 0, y: 30 }, 
-                { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }
+            gsap.fromTo(".fade-up",
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 80%",
+                    }
+                }
             );
         }, containerRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-500 relative overflow-hidden flex items-center pt-20 pb-12" ref={containerRef}>
-            
-            {/* Background glowing orbs */}
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] bg-ieee-orange rounded-full filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-orange-400 rounded-full filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
+        <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300" ref={containerRef}>
 
-            <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                
-                <div className="text-center mb-16 fade-up">
-                    <h4 className="text-sm font-bold text-ieee-orange tracking-[0.2em] uppercase mb-3">Reach Out</h4>
-                    <h1 className="text-4xl md:text-6xl font-black text-ieee-dark dark:text-white capitalize tracking-tight">
-                        Get In Touch
+            {/* Hero Section */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-ieee-dark py-24 md:py-32 shadow-xl">
+                {/* Subtle glowing background orbs */}
+                <div className="absolute top-[-50%] right-[-10%] w-[80%] h-[200%] bg-ieee-orange rounded-full filter blur-[150px] opacity-[0.04] pointer-events-none"></div>
+                <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[100%] bg-blue-500 rounded-full filter blur-[120px] opacity-[0.03] pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center fade-up mt-10 md:mt-0">
+                    <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
+                        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-ieee-orange to-orange-400">Touch</span>
                     </h1>
+                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                        We'd love to hear from you — reach out anytime.
+                    </p>
                 </div>
+            </div>
+
+            <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
 
                 <div className="bg-white dark:bg-ieee-dark-card rounded-[2rem] shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col lg:flex-row transition-all duration-300 fade-up">
-                    
+
                     {/* Left Side: Contact Info */}
                     <div className="lg:w-5/12 bg-gradient-to-br from-gray-900 to-ieee-dark p-10 md:p-14 text-white relative overflow-hidden flex flex-col justify-between">
                         {/* Interactive overlay pattern */}
@@ -48,7 +66,7 @@ const Contact = () => {
                             <div className="space-y-8">
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 backdrop-blur-sm">
-                                        <svg className="w-6 h-6 text-ieee-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        <svg className="w-6 h-6 text-ieee-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">Email</h4>
@@ -57,11 +75,11 @@ const Contact = () => {
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 backdrop-blur-sm">
-                                        <svg className="w-6 h-6 text-ieee-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <svg className="w-6 h-6 text-ieee-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">Location</h4>
-                                        <p className="text-lg font-medium leading-snug">Department of CSE<br/>College of Engineering, Guindy<br/>Anna University, Chennai</p>
+                                        <p className="text-lg font-medium leading-snug">Department of CSE<br />College of Engineering, Guindy<br />Anna University, Chennai</p>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +111,7 @@ const Contact = () => {
                                     />
                                 </div>
                             </div>
-                            
+
                             <div className="space-y-2">
                                 <label htmlFor="subject" className="block text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider ml-1">Subject</label>
                                 <input
@@ -119,7 +137,7 @@ const Contact = () => {
                                 className="inline-flex items-center justify-center gap-2 px-10 py-4 font-bold text-white bg-gradient-to-r from-ieee-orange to-orange-500 rounded-full hover:shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1 transition-all duration-300 w-full md:w-auto"
                             >
                                 Send Message
-                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                             </button>
                         </form>
                     </div>

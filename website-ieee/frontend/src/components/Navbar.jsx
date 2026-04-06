@@ -1,27 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import ieeeLogoWhite from '../assets/IEEE-logo-white-transparent.png';
 import ieeeLogoBlack from '../assets/IEEE-logo-black.jpeg';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
 
-    // Theme state - persisted to localStorage
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-
+    // Force dark mode on mount
     useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
-    };
+        document.documentElement.classList.add('dark');
+    }, []);
 
     // Close mobile menu on route change
     useEffect(() => {
@@ -31,29 +19,14 @@ const Navbar = () => {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
-    // ─── THEME-BASED STYLES ───────────────────────────────────────────────────
-    //
-    // DARK MODE:
-    //   • Logo  → IEEE-logo-black.jpeg  (white text on black bg)
-    //   • Header → bg-black             (matches logo bg → seamless)
-    //   • Text  → text-white
-    //
-    // LIGHT MODE:
-    //   • Logo  → IEEE-logo-white.jpeg  (black text on white bg)
-    //   • Header → bg-white             (matches logo bg → seamless)
-    //   • Text  → text-gray-900
-    //
-    const isDark = theme === 'dark';
-
-    const currentLogo = isDark ? ieeeLogoBlack : ieeeLogoWhite;
-    // mix-blend-screen   → black JPEG background disappears on dark header
-    // mix-blend-multiply → white JPEG background disappears on light header
-    const logoBlend = isDark ? 'mix-blend-screen' : 'mix-blend-multiply';
-    const headerBg = isDark ? 'bg-black' : 'bg-white';
-    const textColor = isDark ? 'text-white' : 'text-gray-900';
+    // ─── DARK-MODE STYLES (hardcoded) ─────────────────────────────────────────
+    const currentLogo = ieeeLogoBlack;
+    const logoBlend = 'mix-blend-screen';
+    const headerBg = 'bg-black';
+    const textColor = 'text-white';
     const hoverColor = 'hover:text-orange-500';
-    const iconHoverBg = isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100';
-    const mobileBg = isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-100';
+    const iconHoverBg = 'hover:bg-gray-800';
+    const mobileBg = 'bg-black border-gray-800';
 
     const linkClass = (isActive) =>
         `text-sm font-semibold tracking-wide transition-colors duration-200 ${isActive ? 'text-orange-500' : `${textColor} ${hoverColor}`
@@ -85,47 +58,10 @@ const Navbar = () => {
                             );
                         })}
 
-                        {/* Dark-mode toggle */}
-                        <button
-                            onClick={toggleTheme}
-                            aria-label="Toggle Dark Mode"
-                            className={`p-2 rounded-full ${textColor} ${iconHoverBg} transition-colors focus:outline-none`}
-                        >
-                            {isDark ? (
-                                /* Sun icon */
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                            ) : (
-                                /* Moon icon */
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                </svg>
-                            )}
-                        </button>
                     </div>
 
                     {/* ── Mobile Controls ───────────────────────────── */}
                     <div className="md:hidden flex items-center gap-3">
-                        {/* Dark-mode toggle */}
-                        <button
-                            onClick={toggleTheme}
-                            className={`p-2 rounded-full ${textColor} ${iconHoverBg} transition-colors focus:outline-none`}
-                        >
-                            {isDark ? (
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                            ) : (
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                </svg>
-                            )}
-                        </button>
 
                         {/* Hamburger */}
                         <button

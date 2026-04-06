@@ -1,20 +1,35 @@
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import currentevent1 from '../assets/upcoming-events/Level-up-ITRIX.png';
 import currentevent2 from '../assets/upcoming-events/paper-presentation-placeholder.jpeg';
 import posterImg from '../assets/upcoming-events/PAPER presentation event poster.png';
 import neonovaPast from '../assets/PAST EVENT - neonova.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Events = () => {
     const containerRef = useRef(null);
     const [selectedPoster, setSelectedPoster] = useState(null);
 
     useEffect(() => {
-        gsap.fromTo(
-            containerRef.current,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
-        );
+        const ctx = gsap.context(() => {
+            gsap.fromTo(".fade-up",
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 80%",
+                    }
+                }
+            );
+        }, containerRef);
+        return () => ctx.revert();
     }, []);
 
     const upcomingEvents = [
@@ -70,13 +85,13 @@ const Events = () => {
                 <img src={event.imgloc} alt="Event Image" className={`w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ${event.status === 'past' ? 'opacity-80' : ''}`} />
                 {event.status === 'past' && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-10 w-full h-full pointer-events-none transition-opacity duration-500 group-hover:bg-black/20">
-                         <div className="bg-red-500/90 text-white font-extrabold text-xl py-2 px-6 rounded-full tracking-widest uppercase shadow-lg drop-shadow-md border-2 border-white/20 transform -rotate-12 group-hover:scale-110 transition-transform duration-300">
-                             Event Over
-                         </div>
+                        <div className="bg-red-500/90 text-white font-extrabold text-xl py-2 px-6 rounded-full tracking-widest uppercase shadow-lg drop-shadow-md border-2 border-white/20 transform -rotate-12 group-hover:scale-110 transition-transform duration-300">
+                            Event Over
+                        </div>
                     </div>
                 )}
             </div>
-            
+
             {/* Text & Information section */}
             <div className="p-8 md:w-2/3 flex flex-col h-full relative">
                 <div className="flex justify-between items-start mb-4 flex-shrink-0">
@@ -87,7 +102,7 @@ const Events = () => {
                         {event.type}
                     </span>
                 </div>
-                
+
                 {/* Description */}
                 <div className="relative flex-grow mb-6 overflow-hidden">
                     <div className="absolute inset-0 overflow-y-auto pr-2 custom-scrollbar">
@@ -95,7 +110,7 @@ const Events = () => {
                             {event.description}
                         </p>
                         {event.status === 'past' && (
-                             <p className="mt-4 italic text-sm text-gray-400 dark:text-gray-500 font-semibold border-l-4 border-gray-300 dark:border-gray-700 pl-3">This event has already concluded.</p>
+                            <p className="mt-4 italic text-sm text-gray-400 dark:text-gray-500 font-semibold border-l-4 border-gray-300 dark:border-gray-700 pl-3">This event has already concluded.</p>
                         )}
                     </div>
                 </div>
@@ -112,7 +127,7 @@ const Events = () => {
                     </div>
                     <div className="flex items-center gap-3">
                         {event.posterDetails && (
-                            <button 
+                            <button
                                 onClick={() => setSelectedPoster(event.posterDetails)}
                                 className="group/btn flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-ieee-orange dark:hover:text-ieee-orange transition-all duration-300 border-b-2 border-transparent hover:border-ieee-orange"
                             >
@@ -126,7 +141,7 @@ const Events = () => {
                             </button>
                         ) : (
                             <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="px-8 py-2.5 bg-ieee-orange text-white rounded-full font-bold hover:bg-orange-600 transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 inline-block cursor-pointer flex items-center gap-2">
-                               Register Now 🌟
+                                Register Now 🌟
                             </a>
                         )}
                     </div>
@@ -136,15 +151,32 @@ const Events = () => {
     );
 
     return (
-        <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24" ref={containerRef}>
-                
+        <div className="min-h-screen bg-ieee-warm-white dark:bg-ieee-dark transition-colors duration-300" ref={containerRef}>
+
+            {/* Hero Section */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-ieee-dark py-24 md:py-32 shadow-xl">
+                {/* Subtle glowing background orbs */}
+                <div className="absolute top-[-50%] right-[-10%] w-[80%] h-[200%] bg-ieee-orange rounded-full filter blur-[150px] opacity-[0.04] pointer-events-none"></div>
+                <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[100%] bg-blue-500 rounded-full filter blur-[120px] opacity-[0.03] pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center fade-up mt-10 md:mt-0">
+                    <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
+                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-ieee-orange to-orange-400">Events</span>
+                    </h1>
+                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                        Workshops, hackathons, and competitions that push the boundaries of innovation.
+                    </p>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+
                 {/* Upcoming Events Section */}
-                <div className="mb-20">
+                <div className="mb-20 fade-up">
                     <div className="flex items-center justify-center mb-12 relative">
-                        <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-ieee-orange to-orange-400 text-center uppercase tracking-tight z-10 bg-ieee-warm-white dark:bg-ieee-dark px-6">
-                            Upcoming Events
-                        </h1>
+                        <h2 className="text-sm font-bold text-ieee-orange tracking-widest uppercase flex items-center gap-2 z-10 bg-ieee-warm-white dark:bg-ieee-dark px-6">
+                            <span className="w-8 h-0.5 bg-ieee-orange"></span> Upcoming Events <span className="w-8 h-0.5 bg-ieee-orange"></span>
+                        </h2>
                         <div className="absolute inset-x-0 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-ieee-orange/30 to-transparent -z-0"></div>
                     </div>
                     {upcomingEvents.length > 0 ? (
@@ -157,11 +189,11 @@ const Events = () => {
                 </div>
 
                 {/* Past Events Section */}
-                <div>
-                     <div className="flex items-center justify-center mb-12 relative">
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-400 dark:text-gray-500 text-center uppercase tracking-wider shadow-sm z-10 bg-ieee-warm-white dark:bg-ieee-dark px-6">
-                            Past Events
-                        </h1>
+                <div className="fade-up">
+                    <div className="flex items-center justify-center mb-12 relative">
+                        <h2 className="text-sm font-bold text-gray-400 dark:text-gray-500 tracking-widest uppercase flex items-center gap-2 z-10 bg-ieee-warm-white dark:bg-ieee-dark px-6">
+                            <span className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600"></span> Past Events <span className="w-8 h-0.5 bg-gray-300 dark:bg-gray-600"></span>
+                        </h2>
                         <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -z-0"></div>
                     </div>
                     {pastEvents.length > 0 ? (
@@ -177,17 +209,17 @@ const Events = () => {
             {selectedPoster && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300" onClick={() => setSelectedPoster(null)}>
                     <div className="relative max-h-full max-w-5xl w-full flex flex-col items-center justify-center transform transition-transform duration-300 scale-100" onClick={e => e.stopPropagation()}>
-                        <button 
-                            className="absolute -top-12 right-0 sm:-right-8 text-white/70 hover:text-white hover:rotate-90 transition-all duration-300 bg-black/20 hover:bg-black/40 rounded-full p-2" 
+                        <button
+                            className="absolute -top-12 right-0 sm:-right-8 text-white/70 hover:text-white hover:rotate-90 transition-all duration-300 bg-black/20 hover:bg-black/40 rounded-full p-2"
                             onClick={() => setSelectedPoster(null)}
                             title="Close"
                         >
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </button>
-                        <img 
-                            src={selectedPoster} 
-                            alt="Event Poster" 
-                            className="max-h-[85vh] w-auto max-w-full rounded-xl shadow-2xl object-contain border border-white/10" 
+                        <img
+                            src={selectedPoster}
+                            alt="Event Poster"
+                            className="max-h-[85vh] w-auto max-w-full rounded-xl shadow-2xl object-contain border border-white/10"
                         />
                     </div>
                 </div>
