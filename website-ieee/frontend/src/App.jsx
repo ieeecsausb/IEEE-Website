@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Members from './pages/Members';
 import Events from './pages/Events';
-import Projects from './pages/Projects';
+
 import Contact from './pages/Contact';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -32,7 +32,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/members" element={<Members />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/projects" element={<Projects />} />
+
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

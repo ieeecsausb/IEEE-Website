@@ -7,6 +7,9 @@ import neonova_25 from '../assets/prev-events/neonova_2025.png';
 import codesprint1 from '../assets/prev-events/codesprint1.png';
 import codesprint2 from '../assets/prev-events/codesprint2.png';
 import blockchain_webinar from '../assets/prev-events/blockchain_webinar.png';
+import neonova_26 from '../assets/NEONOVA\'26.jpeg';
+import event2 from '../assets/EVENT-2.png';
+import event3 from '../assets/EVENT 3.png';
 
 const events = [
   {
@@ -63,6 +66,21 @@ const events = [
     ],
     desc: 'The webinar was held on March 14, 2025. The featured speaker was Dr. Bhalaji N, a Senior Consultant at IITM Pravartak Technology Foundation, who provided expert insights into the technology\'s evolution. His presentation explored the progression from Web 1.0 to Web 3.0, the history of blockchain, and technical components like the SHA256 hashing algorithm. To provide practical understanding, the session included a live demonstration of blockchain in action followed by an interactive Q&A.',
   },
+  {
+    title: "NEONOVA'26 — Ideathon",
+    images: [neonova_26],
+    desc: "Held on February 20, 2026, NEONOVA'26 challenged teams of 2–4 to build innovative solutions across Healthcare, Cyber Security, Responsible AI, and Sustainability. Participants were evaluated on creativity, feasibility, and presentation. Bold ideas met real-world impact as students showcased cutting-edge thinking across high-priority domains.",
+  },
+  {
+    title: 'Technical Meeting — Building Trustworthy AI Systems for India ✨',
+    images: [event2],
+    desc: 'Organized by IEEE Madras Section in association with the Dept. of CSE, CEG, Anna University and AU IEEE CS Student Branch, this technical meeting brought together researchers, students, and policymakers. Dr. Geetha Raju, Senior Policy Analyst – AI & Data Science at CeRAI, IIT Madras, delivered an insightful session on ethical AI, responsible innovation, and the policy frameworks shaping India\'s AI future — emphasizing transparency, inclusivity, and trustworthiness.',
+  },
+  {
+    title: 'Cross-Cultural Tech Connect 2025 🚀',
+    images: [event3],
+    desc: 'Hosted by IEEE CS CEG SB and the Dept. of CSE, CEG, this global gathering at Anna University brought together international educators and students for a day of innovation and collaboration. Sessions covered AI\'s role in education and cultural heritage, live project demonstrations, and a rich cultural exchange — bridging technology and global perspectives under one roof.',
+  },
 ];
 
 const EventCarousel = () => {
@@ -70,7 +88,6 @@ const EventCarousel = () => {
   const tweenRef = useRef(null);
   const modalRef = useRef(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -110,7 +127,6 @@ const EventCarousel = () => {
 
   const openModal = (evt) => {
     setSelectedEvent(evt);
-    setPhotoIndex(0);
     tweenRef.current?.pause();
     requestAnimationFrame(() => {
       if (modalRef.current) {
@@ -132,31 +148,13 @@ const EventCarousel = () => {
         ease: 'power2.in',
         onComplete: () => {
           setSelectedEvent(null);
-          setPhotoIndex(0);
           tweenRef.current?.resume();
         },
       });
     } else {
       setSelectedEvent(null);
-      setPhotoIndex(0);
       tweenRef.current?.resume();
     }
-  };
-
-  const prevPhoto = (e) => {
-    e.stopPropagation();
-    if (!selectedEvent) return;
-    setPhotoIndex((prev) =>
-      prev === 0 ? selectedEvent.images.length - 1 : prev - 1
-    );
-  };
-
-  const nextPhoto = (e) => {
-    e.stopPropagation();
-    if (!selectedEvent) return;
-    setPhotoIndex((prev) =>
-      prev === selectedEvent.images.length - 1 ? 0 : prev + 1
-    );
   };
 
   // Use first image from each event for carousel thumbnails
@@ -203,36 +201,13 @@ const EventCarousel = () => {
             style={{ maxWidth: '960px' }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Image with arrows */}
+            {/* Image */}
             <div className="relative w-full overflow-hidden" style={{ height: 'clamp(300px, 50vh, 540px)' }}>
               <img
-                src={selectedEvent.images[photoIndex]}
-                alt={`${selectedEvent.title} photo ${photoIndex + 1}`}
-                className="w-full h-full object-cover transition-opacity duration-300"
+                src={selectedEvent.images[0]}
+                alt={selectedEvent.title}
+                className="w-full h-full object-cover"
               />
-
-              {/* Left Arrow */}
-              <button
-                onClick={prevPhoto}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center text-2xl font-bold transition-colors duration-200 cursor-pointer backdrop-blur-sm"
-                aria-label="Previous photo"
-              >
-                ‹
-              </button>
-
-              {/* Right Arrow */}
-              <button
-                onClick={nextPhoto}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center text-2xl font-bold transition-colors duration-200 cursor-pointer backdrop-blur-sm"
-                aria-label="Next photo"
-              >
-                ›
-              </button>
-
-              {/* Photo counter */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-1.5 rounded-full">
-                {photoIndex + 1} / {selectedEvent.images.length}
-              </div>
             </div>
 
             {/* Details */}
