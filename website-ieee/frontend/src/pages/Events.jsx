@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import currentevent1 from '../assets/upcoming-events/Level-up-ITRIX.png';
 import currentevent2 from '../assets/upcoming-events/paper-presentation-placeholder.jpeg';
 import posterImg from '../assets/upcoming-events/PAPER presentation event poster.png';
+import neonovaPast from '../assets/PAST EVENT - neonova.png';
 
 const Events = () => {
     const containerRef = useRef(null);
@@ -32,7 +33,7 @@ const Events = () => {
     ];
 
     const pastEvents = [
-         {
+        {
             id: 1,
             title: "Level Up - ITRIX",
             type: "Tech Event",
@@ -43,8 +44,21 @@ const Events = () => {
             4 domains to master.
             1 final race to dominate.
             Every choice counts. Every second matters.
-            Bring your team. Bring your A-game. Let’s see who makes it to the Final Lap. 🚀`,
+            Bring your team. Bring your A-game. Let's see who makes it to the Final Lap. 🚀`,
             imgloc: currentevent1,
+            status: "past"
+        },
+        {
+            id: 3,
+            title: "NEONOVA'26 — Ideathon",
+            type: "Ideathon",
+            date: "Feb 20, 2026",
+            location: "Temenos Lab",
+            description: `Where bold ideas meet real-world impact! Teams of 2–4 competed to build innovative solutions across Healthcare, Cyber Security, Responsible AI, and Sustainability — judged on creativity, feasibility, and presentation.
+
+👥 Team Size: 2–4 Members  |  ⏰ 09:30 AM – 05:00 PM
+💵 Prize Pool: ₹6,000`,
+            imgloc: neonovaPast,
             status: "past"
         }
     ];
@@ -80,7 +94,6 @@ const Events = () => {
                         <p className="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line text-justify md:text-left">
                             {event.description}
                         </p>
-                        {/* Render Past Event text faintly for emphasis */}
                         {event.status === 'past' && (
                              <p className="mt-4 italic text-sm text-gray-400 dark:text-gray-500 font-semibold border-l-4 border-gray-300 dark:border-gray-700 pl-3">This event has already concluded.</p>
                         )}

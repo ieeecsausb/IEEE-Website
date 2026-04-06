@@ -24,67 +24,7 @@ if (typeof document !== 'undefined' && !document.getElementById('ken-burns-style
     document.head.appendChild(el);
 }
 
-// Circuit terminal styles
-const circuitStyle = `
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
-/* Light mode tokens */
-:root {
-  --st-bg:           #fff8f2;
-  --st-cell-bg:      #ffffff;
-  --st-cell-hover:   #fef3eb;
-  --st-grid:         rgba(255,107,53,0.07);
-  --st-number:       #1e1e1e;
-  --st-label:        rgba(30,30,30,0.45);
-  --st-code:         rgba(255,107,53,0.65);
-  --st-corner:       rgba(255,107,53,0.55);
-  --st-separator:    rgba(255,107,53,0.15);
-  --st-border:       rgba(255,107,53,0.22);
-  --st-footer:       rgba(255,107,53,0.35);
-  --st-scan:         rgba(255,107,53,0.05);
-  --st-heading:      #1e1e1e;
-}
-
-/* Dark mode tokens */
-:root.dark {
-  --st-bg:           #080808;
-  --st-cell-bg:      #080808;
-  --st-cell-hover:   #111111;
-  --st-grid:         rgba(255,107,53,0.05);
-  --st-number:       #ffffff;
-  --st-label:        rgba(255,255,255,0.4);
-  --st-code:         rgba(255,107,53,0.55);
-  --st-corner:       rgba(255,107,53,0.6);
-  --st-separator:    rgba(255,107,53,0.18);
-  --st-border:       rgba(255,107,53,0.2);
-  --st-footer:       rgba(255,107,53,0.3);
-  --st-scan:         rgba(255,107,53,0.04);
-  --st-heading:      #ffffff;
-}
-
-@keyframes scanLine {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(200%); }
-}
-@keyframes statusBlink {
-  0%, 100% { opacity: 1;   box-shadow: 0 0 8px #ff6b35, 0 0 16px rgba(255,107,53,0.5); }
-  50%       { opacity: 0.3; box-shadow: none; }
-}
-@keyframes borderPulse {
-  0%, 100% { opacity: 0.15; }
-  50%       { opacity: 0.45; }
-}
-.stat-cell            { background: var(--st-cell-bg) !important; }
-.stat-cell:hover      { background: var(--st-cell-hover) !important; }
-.stat-cell:hover .stat-glow-line { opacity: 1 !important; }
-.stat-cell:hover .stat-number    { text-shadow: 0 0 60px rgba(255,107,53,0.6) !important; color: #ff6b35 !important; }
-`;
-if (typeof document !== 'undefined' && !document.getElementById('circuit-style')) {
-    const el = document.createElement('style');
-    el.id = 'circuit-style';
-    el.textContent = circuitStyle;
-    document.head.appendChild(el);
-}
 
 const STATS = [
     { label: 'Active Members', value: 25, suffix: '+', code: 'MBR_COUNT', icon: '◈' },
@@ -195,180 +135,79 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Stats Section — Circuit Terminal */}
-            <section className="relative overflow-hidden" style={{ background: 'var(--st-bg)' }}>
-                {/* Fine grid */}
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `
-                        linear-gradient(var(--st-grid) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--st-grid) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '48px 48px',
+            {/* Stats Section */}
+            <section className="relative py-20 overflow-hidden bg-ieee-light dark:bg-ieee-dark transition-colors duration-300">
+
+                {/* Subtle orange dot pattern — matches site palette, very light */}
+                <div className="absolute inset-0 pointer-events-none" style={{
+                    backgroundImage: 'radial-gradient(circle, rgba(255,107,53,0.08) 1px, transparent 1px)',
+                    backgroundSize: '28px 28px',
                 }} />
 
-                {/* Slow scan-line sweep */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div style={{
-                        position: 'absolute', left: 0, right: 0, height: '160px',
-                        background: 'linear-gradient(180deg, transparent 0%, var(--st-scan) 50%, transparent 100%)',
-                        animation: 'scanLine 8s linear infinite',
-                    }} />
-                </div>
+                {/* Top accent line matching the site's orange */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-ieee-orange/40 to-transparent" />
 
-                {/* Animated border top */}
-                <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
-                    background: 'linear-gradient(90deg, transparent 0%, #ff6b35 30%, #ff6b35 70%, transparent 100%)',
-                    animation: 'borderPulse 3s ease-in-out infinite',
-                }} />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={statsRef}>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20" ref={statsRef}>
-
-                    {/* Header */}
+                    {/* Header — same style as Events section */}
                     <div className="text-center mb-14">
-                        <div style={{
-                            fontFamily: "'Orbitron', monospace",
-                            fontSize: '0.6rem',
-                            letterSpacing: '0.6em',
-                            color: 'var(--st-code)',
-                            marginBottom: '10px',
-                            textTransform: 'uppercase',
-                        }}>
-                            ── SYSTEM STATUS :: ONLINE ──
-                        </div>
-                        <h2 style={{
-                            fontFamily: "'Orbitron', monospace",
-                            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
-                            fontWeight: 900,
-                            color: 'var(--st-heading)',
-                            letterSpacing: '0.08em',
-                            lineHeight: 1.2,
-                        }}>
-                            BY THE <span style={{ color: '#ff6b35' }}>NUMBERS</span>
+                        <h4 className="text-ieee-orange font-bold uppercase tracking-wider mb-2 text-sm">Our Impact</h4>
+                        <h2 className="text-3xl md:text-4xl font-bold text-ieee-dark dark:text-white transition-colors duration-300">
+                            By the <span className="text-ieee-orange">Numbers</span>
                         </h2>
-                        <div style={{
-                            width: '80px', height: '2px', margin: '16px auto 0',
-                            background: 'linear-gradient(90deg, transparent, #ff6b35, transparent)',
-                        }} />
+                        <div className="w-16 h-[2px] bg-ieee-orange/40 mx-auto mt-4 rounded-full" />
                     </div>
 
-                    {/* Stat grid — 1px orange separator lines */}
-                    <div className="grid grid-cols-2 md:grid-cols-4" style={{
-                        gap: '1px',
-                        background: 'var(--st-separator)',
-                        border: '1px solid var(--st-border)',
-                        borderRadius: '6px',
-                        overflow: 'hidden',
-                    }}>
+                    {/* Stat cards */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                         {STATS.map((stat, i) => (
                             <div
                                 key={i}
-                                className="stat-cell"
-                                style={{
-                                    padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 2rem)',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                    cursor: 'default',
-                                    transition: 'background 0.25s ease',
-                                }}
+                                className="group relative bg-white dark:bg-ieee-dark-card rounded-2xl p-8 text-center
+                                           border border-gray-200/60 dark:border-white/5
+                                           shadow-sm hover:shadow-lg hover:-translate-y-1
+                                           transition-all duration-300 overflow-hidden cursor-default"
                             >
-                                {/* Corner brackets */}
-                                <span style={{ position: 'absolute', top: 10, left: 10, width: 12, height: 12, borderTop: '1.5px solid var(--st-corner)', borderLeft: '1.5px solid var(--st-corner)', display: 'block' }} />
-                                <span style={{ position: 'absolute', bottom: 10, right: 10, width: 12, height: 12, borderBottom: '1.5px solid var(--st-corner)', borderRight: '1.5px solid var(--st-corner)', display: 'block' }} />
+                                {/* Subtle orange left accent bar */}
+                                <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-r-full
+                                               bg-ieee-orange/20 group-hover:bg-ieee-orange/70
+                                               transition-colors duration-300" />
 
-                                {/* Status row */}
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
-                                    <span style={{
-                                        width: 7, height: 7, borderRadius: '50%', display: 'inline-block', flexShrink: 0,
-                                        background: '#ff6b35',
-                                        animation: `statusBlink 2.2s ease-in-out infinite`,
-                                        animationDelay: `${i * 0.5}s`,
-                                    }} />
-                                    <span style={{
-                                        fontFamily: "'Orbitron', monospace",
-                                        fontSize: '0.52rem',
-                                        color: 'var(--st-code)',
-                                        letterSpacing: '0.18em',
-                                        textTransform: 'uppercase',
-                                    }}>
-                                        {stat.code}
-                                    </span>
-                                </div>
-
-                                {/* Icon */}
-                                <div style={{
-                                    fontFamily: "'Orbitron', monospace",
-                                    fontSize: '0.75rem',
-                                    color: 'rgba(255,107,53,0.4)',
-                                    marginBottom: 6,
-                                    letterSpacing: '0.1em',
-                                }}>
-                                    {stat.icon}
-                                </div>
+                                {/* Orange glow wash on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-ieee-orange/0 to-ieee-orange/0
+                                               group-hover:from-ieee-orange/5 group-hover:to-transparent
+                                               transition-all duration-500 pointer-events-none rounded-2xl" />
 
                                 {/* Counter */}
                                 <div
                                     ref={el => counterRefs.current[i] = el}
-                                    className="stat-number"
-                                    style={{
-                                        fontFamily: "'Orbitron', monospace",
-                                        fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-                                        fontWeight: 900,
-                                        color: 'var(--st-number)',
-                                        lineHeight: 1,
-                                        textShadow: '0 0 30px rgba(255,107,53,0.15)',
-                                        transition: 'color 0.3s, text-shadow 0.3s',
-                                        marginBottom: 12,
-                                    }}
+                                    className="text-5xl md:text-6xl font-extrabold text-ieee-dark dark:text-white
+                                               mb-2 leading-none tracking-tight
+                                               group-hover:text-ieee-orange transition-colors duration-300"
                                 >
                                     0{stat.suffix}
                                 </div>
 
                                 {/* Label */}
-                                <div style={{
-                                    fontFamily: "'Poppins', sans-serif",
-                                    color: 'var(--st-label)',
-                                    fontSize: '0.7rem',
-                                    letterSpacing: '0.14em',
-                                    textTransform: 'uppercase',
-                                }}>
+                                <div className="text-xs font-semibold tracking-[0.18em] uppercase
+                                               text-gray-400 dark:text-gray-500
+                                               group-hover:text-gray-600 dark:group-hover:text-gray-300
+                                               transition-colors duration-300 mt-1">
                                     {stat.label}
                                 </div>
-
-                                {/* Hover glow line at bottom */}
-                                <div
-                                    className="stat-glow-line"
-                                    style={{
-                                        position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
-                                        background: 'linear-gradient(90deg, transparent, #ff6b35 40%, #ff6b35 60%, transparent)',
-                                        opacity: 0,
-                                        transition: 'opacity 0.3s ease',
-                                    }}
-                                />
                             </div>
                         ))}
                     </div>
 
-                    {/* Footer tag line */}
-                    <div style={{
-                        textAlign: 'center', marginTop: 24,
-                        fontFamily: "'Orbitron', monospace",
-                        fontSize: '0.55rem',
-                        color: 'var(--st-footer)',
-                        letterSpacing: '0.4em',
-                        textTransform: 'uppercase',
-                    }}>
+                    {/* Footer line */}
+                    <p className="text-center mt-10 text-xs font-medium tracking-[0.25em] uppercase
+                                  text-gray-300 dark:text-gray-600">
                         IEEE CS · Anna University Student Branch · Est. 2023
-                    </div>
+                    </p>
                 </div>
 
-                {/* Animated border bottom */}
-                <div style={{
-                    position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
-                    background: 'linear-gradient(90deg, transparent 0%, #ff6b35 30%, #ff6b35 70%, transparent 100%)',
-                    animation: 'borderPulse 3s ease-in-out infinite',
-                    animationDelay: '1.5s',
-                }} />
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-ieee-orange/40 to-transparent" />
             </section>
             {/* Events Carousel */}
             <section className="py-20 bg-orange-50/30 dark:bg-ieee-dark-card transition-colors duration-300">

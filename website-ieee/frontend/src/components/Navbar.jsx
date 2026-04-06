@@ -149,7 +149,7 @@ const Navbar = () => {
             {isOpen && (
                 <div className={`md:hidden absolute w-full left-0 top-full shadow-lg border-t ${mobileBg}`}>
                     <div className="px-4 pt-2 pb-4 space-y-1">
-                        {['Home', 'About', 'Members', 'Events', 'Projects', 'Contact'].map((item) => {
+                        {['Home', 'About', 'Members', 'Events', 'Contact'].map((item) => {
                             const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                             const isActive = location.pathname === path;
                             return (

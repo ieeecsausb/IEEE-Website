@@ -22,6 +22,7 @@ import dhanush from "../assets/dhanush.png";
 import aadhi from "../assets/aadhi.png";
 import chandini from "../assets/chandini.png";
 import abhinav from "../assets/abhinav.png";
+import abhishek from "../assets/abhishek.png";
 import siva from "../assets/siva sanjay.jpeg";
 import swayam from "../assets/swayam.png";
 import sheik from "../assets/sheik.png";
@@ -34,6 +35,7 @@ const mentor = {
   name: "Dr. T Sree Sharmila",
   role: "Faculty Mentor",
   img: sharmila,
+  imgStyle: { objectPosition: 'center 20%' },
 };
 
 const teams = [
@@ -41,11 +43,11 @@ const teams = [
     label: "Executives",
     accent: "from-ieee-orange to-amber-500",
     members: [
-      { name: "Ojaskrisshnan", role: "Chairperson", img: ojas, objectPos: "object-contain" },
+      { name: "Ojaskrisshnan", role: "Chairperson", img: ojas, objectPos: "object-contain", bgWhite: true },
       { name: "Swayamprabha", role: "Vice Chair", img: swayam },
       { name: "Shreem Seth", role: "Secretary", img: shreem },
       { name: "Hemananth R", role: "Treasurer", img: hemanth },
-      { name: "Shaan", role: "Joint Secretary", img: shaan, objectPos: "object-contain" },
+      { name: "Shaan", role: "Joint Secretary", img: shaan, objectPos: "object-contain", bgWhite: true },
     ],
   },
   {
@@ -56,7 +58,7 @@ const teams = [
       { name: "Naraen Rammoorthi", role: "Jr Head", img: naraen },
       { name: "Lokesh Selvam", role: "Jr Head", img: lokesh },
       { name: "Akshaya K", role: "Member", img: akshaya },
-      { name: "Saran Kumar", role: "Member", img: saran },
+      { name: "Saran Kumar", role: "Member", img: saran, imgStyle: { objectPosition: 'center 15%' } },
       { name: "Prannitha", role: "Member", img: prannitha },
     ],
   },
@@ -65,9 +67,9 @@ const teams = [
     accent: "from-pink-500 to-rose-400",
     members: [
       { name: "Amitha", role: "Head", img: amitha },
-      { name: "Kaaviya", role: "Head", img: kaaviya },
+      { name: "Kaaviya", role: "Head", img: kaaviya, imgStyle: { objectPosition: '55% 20%' } },
       { name: "Preethi", role: "Jr Head", img: preethi },
-      { name: "NimithaShree", role: "Jr Head", img: nimitha },
+      { name: "NimithaShree", role: "Jr Head", img: nimitha, imgStyle: { objectPosition: '55% 20%' } },
       { name: "Varshini", role: "Jr Head", img: varshini },
     ],
   },
@@ -76,8 +78,8 @@ const teams = [
     accent: "from-violet-500 to-purple-400",
     members: [
       { name: "Tanvi Reddy", role: "Head", img: tanvi },
-      { name: "Sriharini S", role: "Jr Head", img: harini, objectPos: "object-contain" },
-      { name: "Dhanush S", role: "Member", img: dhanush, objectPos: "object-contain" },
+      { name: "Sriharini S", role: "Jr Head", img: harini, objectPos: "object-contain", bgWhite: true },
+      { name: "Dhanush S", role: "Member", img: dhanush, objectPos: "object-contain", bgWhite: true },
     ],
   },
   {
@@ -94,27 +96,28 @@ const teams = [
     accent: "from-yellow-500 to-orange-400",
     members: [
       { name: "C.S. Abhinav", role: "Head", img: abhinav },
-      { name: "Abhishek S", role: " Head", img: "" },
+      { name: "Abhishek S", role: "Head", img: abhishek, objectPos: "object-contain", bgWhite: true },
       { name: "Mohamed Jasim J", role: "Jr Head", img: "" },
-      { name: "Siva Sajay S", role: "Jr Head", img: siva },
+      { name: "Siva Sanjay S", role: "Jr Head", img: siva, imgStyle: { objectPosition: '40% 30%' } },
     ],
   },
 ];
 
 /* ── Card Component ─────────────────────────────────── */
 
-const MemberCard = ({ name, role, img, large, objectPos = "object-cover object-top" }) => (
+const MemberCard = ({ name, role, img, large, objectPos = "object-cover object-top", bgWhite = false, imgStyle = {} }) => (
   <div
     className={`group relative bg-white dark:bg-ieee-dark-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-[transform,box-shadow] duration-300 transform hover:-translate-y-2 w-full ${large ? "max-w-md mx-auto" : ""}`}
   >
     <div
-      className={`w-full overflow-hidden bg-gray-200 dark:bg-ieee-dark-accent relative ${large ? "h-72" : "h-64"}`}
+      className={`w-full overflow-hidden relative ${large ? "h-72" : "h-64"} ${bgWhite ? "bg-white" : "bg-gray-200 dark:bg-ieee-dark-accent"}`}
     >
       {img ? (
         <img
           src={img}
           alt={name}
           className={`w-full h-full ${objectPos} group-hover:scale-110 transition-transform duration-500`}
+          style={imgStyle}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 text-5xl font-bold bg-gray-100 dark:bg-ieee-dark-card group-hover:scale-110 transition-transform duration-500">
@@ -206,23 +209,28 @@ const Members = () => {
               role={mentor.role}
               img={mentor.img}
               objectPos={mentor.objectPos}
+              imgStyle={mentor.imgStyle}
               large
             />
           </div>
         </section>
 
         {/* ── Team Tab Bar ── */}
-        <nav className="flex flex-wrap justify-center gap-3 mb-14">
+        <nav className="flex flex-wrap justify-center gap-2 mb-14">
           {teams.map((team, idx) => (
             <button
               key={team.label}
               onClick={() => setActiveTab(idx)}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer border-2 ${activeTab === idx
-                ? "bg-ieee-orange text-white border-transparent shadow-lg scale-105"
-                : "bg-white dark:bg-ieee-dark-card text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-ieee-orange hover:text-ieee-orange dark:hover:border-ieee-orange dark:hover:text-ieee-orange"
-                }`}
+              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${
+                activeTab === idx
+                  ? "bg-ieee-orange text-white shadow-lg shadow-ieee-orange/30 scale-105"
+                  : "bg-white/5 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-ieee-orange hover:bg-ieee-orange/10 border border-gray-200/30 dark:border-white/10"
+              }`}
             >
               {team.label}
+              {activeTab === idx && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-ieee-orange" />
+              )}
             </button>
           ))}
         </nav>
@@ -235,7 +243,7 @@ const Members = () => {
           >
             {activeTeam.members.map((m, i) => (
               <div key={`${activeTab}-${i}`} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
-                <MemberCard name={m.name} role={m.role} img={m.img} objectPos={m.objectPos} />
+                <MemberCard name={m.name} role={m.role} img={m.img} objectPos={m.objectPos} bgWhite={m.bgWhite} imgStyle={m.imgStyle} />
               </div>
             ))}
           </div>
