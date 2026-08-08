@@ -1,0 +1,631 @@
+/* ============================================================
+   MASATHON — Super Mario themed event page
+   All classes are namespaced `ma-` so nothing leaks into the
+   rest of the IEEE site.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.ma-root {
+  --ma-sky: #5c94fc;
+  --ma-sky-2: #8fc7ff;
+  --ma-ground: #c4661f;
+  --ma-ground-dark: #8a3f0b;
+  --ma-green: #43b047;
+  --ma-green-dk: #0e7a1b;
+  --ma-gold: #fbd000;
+  --ma-red: #e52521;
+  --ma-ink: #000;
+
+  font-family: "Press Start 2P", "Courier New", monospace;
+  position: relative;
+  overflow-x: clip;
+  color: #fff;
+  -webkit-font-smoothing: none;
+  letter-spacing: 0.02em;
+}
+
+.ma-root img,
+.ma-root svg {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ---------- Chunky NES borders ---------- */
+.ma-border {
+  box-shadow:
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000;
+}
+.ma-border-lg {
+  box-shadow:
+    0 -6px 0 0 #000,
+    0 6px 0 0 #000,
+    -6px 0 0 0 #000,
+    6px 0 0 0 #000;
+}
+/* Beveled "block" look: light top-left, dark bottom-right */
+.ma-bevel {
+  box-shadow:
+    inset 4px 4px 0 0 rgba(255, 255, 255, 0.45),
+    inset -4px -4px 0 0 rgba(0, 0, 0, 0.35),
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000;
+}
+
+.ma-shadow-text {
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000;
+}
+
+/* ---------- Scanline / CRT overlay ---------- */
+.ma-crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.13) 0px,
+    rgba(0, 0, 0, 0.13) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+/* ---------- Sky + parallax ---------- */
+.ma-sky {
+  background: linear-gradient(180deg, #2b64d8 0%, #5c94fc 45%, #8fc7ff 100%);
+}
+.ma-sky-night {
+  background: linear-gradient(180deg, #05060f 0%, #10163a 55%, #241a4d 100%);
+}
+.ma-sky-cave {
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 60%, #101010 100%);
+}
+.ma-sky-sunset {
+  background: linear-gradient(180deg, #2b1055 0%, #7b2d6b 40%, #e8642c 78%, #fbb03b 100%);
+}
+
+@keyframes ma-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-120vw, 0, 0);
+  }
+}
+.ma-cloud {
+  animation: ma-drift linear infinite;
+  will-change: transform;
+}
+
+@keyframes ma-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.ma-bob {
+  animation: ma-bob 2.6s ease-in-out infinite;
+}
+
+@keyframes ma-bob-sm {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.ma-bob-sm {
+  animation: ma-bob-sm 1.8s ease-in-out infinite;
+}
+
+/* ---------- Ground strip (repeating brick) ---------- */
+.ma-ground {
+  background-color: #c4661f;
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 2px, transparent 2px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 2px, transparent 2px);
+  background-size:
+    32px 32px,
+    32px 32px,
+    32px 32px;
+  background-position:
+    0 0,
+    0 0,
+    4px 4px;
+  border-top: 6px solid #000;
+}
+.ma-ground-top {
+  background: repeating-linear-gradient(90deg, #43b047 0 8px, #3aa03f 8px 16px);
+  border-top: 4px solid #000;
+}
+
+/* ---------- Block bump ---------- */
+@keyframes ma-bump {
+  0% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.ma-bump {
+  animation: ma-bump 0.28s ease-out;
+}
+
+/* ---------- Coin pop from a block ---------- */
+@keyframes ma-coin-pop {
+  0% {
+    transform: translate(-50%, 0) scaleX(1);
+    opacity: 1;
+  }
+  55% {
+    transform: translate(-50%, -86px) scaleX(0.25);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -34px) scaleX(1);
+    opacity: 0;
+  }
+}
+.ma-coin-pop {
+  animation: ma-coin-pop 0.62s ease-out forwards;
+}
+
+@keyframes ma-coin-spin {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  25% {
+    transform: scaleX(0.15);
+  }
+  50% {
+    transform: scaleX(-1);
+  }
+  75% {
+    transform: scaleX(0.15);
+  }
+}
+.ma-coin-spin {
+  animation: ma-coin-spin 0.75s steps(1, end) infinite;
+}
+
+@keyframes ma-score-float {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -92px);
+    opacity: 0;
+  }
+}
+.ma-score-float {
+  animation: ma-score-float 0.9s ease-out forwards;
+}
+
+/* ---------- Brick shatter ---------- */
+@keyframes ma-shard {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+.ma-shard {
+  animation: ma-shard 0.75s cubic-bezier(0.2, 0.6, 0.5, 1) forwards;
+}
+
+@keyframes ma-shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  75% {
+    transform: translate(-1px, -2px);
+  }
+}
+.ma-shake {
+  animation: ma-shake 0.3s steps(2, end) 2;
+}
+
+/* ---------- Goomba walk ---------- */
+@keyframes ma-patrol {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  49.9% {
+    transform: translateX(var(--range, 220px)) scaleX(1);
+  }
+  50% {
+    transform: translateX(var(--range, 220px)) scaleX(-1);
+  }
+  99.9% {
+    transform: translateX(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+}
+.ma-patrol {
+  animation: ma-patrol linear infinite;
+  will-change: transform;
+}
+@keyframes ma-waddle {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.94) translateY(2px);
+  }
+}
+.ma-waddle {
+  animation: ma-waddle 0.34s steps(2, end) infinite;
+}
+@keyframes ma-squish {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scaleY(0.18) translateY(14px);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.18) translateY(14px);
+    opacity: 0;
+  }
+}
+.ma-squish {
+  animation: ma-squish 0.75s ease-out forwards;
+}
+
+/* ---------- Mario ---------- */
+@keyframes ma-mario-jog {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.ma-mario-jog {
+  animation: ma-mario-jog 0.24s steps(2, end) infinite;
+}
+
+/* Mario jogs the full width of the stage, left to right, forever. */
+@keyframes ma-run-across {
+  from {
+    transform: translateX(-16vw);
+  }
+  to {
+    transform: translateX(104vw);
+  }
+}
+.ma-run-across {
+  animation: ma-run-across 24s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+@keyframes ma-hop {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-72px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.ma-hop {
+  animation: ma-hop 0.62s cubic-bezier(0.3, 0.1, 0.4, 1);
+}
+
+/* ---------- Flagpole ---------- */
+@keyframes ma-flag-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--drop, 190px));
+  }
+}
+.ma-flag-down {
+  animation: ma-flag-down 1.3s ease-in forwards;
+}
+
+@keyframes ma-firework {
+  0% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.ma-firework {
+  animation: ma-firework 0.85s ease-out forwards;
+}
+
+/* ---------- Star invincibility flicker ---------- */
+@keyframes ma-star-hue {
+  0% {
+    filter: hue-rotate(0deg) saturate(1.6);
+  }
+  100% {
+    filter: hue-rotate(360deg) saturate(1.6);
+  }
+}
+.ma-star-hue {
+  animation: ma-star-hue 1.1s linear infinite;
+}
+
+@keyframes ma-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.ma-blink {
+  animation: ma-blink 1s steps(1, end) infinite;
+}
+
+@keyframes ma-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(251, 208, 0, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(251, 208, 0, 0.95));
+  }
+}
+.ma-glow {
+  animation: ma-glow 1.4s ease-in-out infinite;
+}
+
+/* ---------- Warp transition (iris) ---------- */
+.ma-warp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: #000;
+  clip-path: circle(150% at 50% 50%);
+}
+@keyframes ma-iris-close {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+  to {
+    clip-path: circle(150% at 50% 50%);
+  }
+}
+@keyframes ma-iris-open {
+  from {
+    clip-path: circle(150% at 50% 50%);
+  }
+  to {
+    clip-path: circle(0% at 50% 50%);
+  }
+}
+.ma-iris-close {
+  animation: ma-iris-close 0.4s steps(9, end) forwards;
+}
+.ma-iris-open {
+  animation: ma-iris-open 0.4s steps(9, end) forwards;
+}
+
+/* ---------- Big blocky title (poster style) ---------- */
+.ma-title {
+  color: #fbd000;
+  line-height: 1.05;
+  text-shadow:
+    4px 0 0 #e8890c,
+    0 4px 0 #e8890c,
+    4px 4px 0 #e8890c,
+    8px 8px 0 #b35c00,
+    -4px -4px 0 #000,
+    4px -4px 0 #000,
+    -4px 4px 0 #000,
+    12px 12px 0 #000;
+}
+
+/* ---------- Poster-style RGB glitch for AI / VR / AR ---------- */
+.ma-glitch {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+.ma-glitch::before,
+.ma-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.ma-glitch::before {
+  color: #ff2bd1;
+  transform: translate(-3px, 0);
+  mix-blend-mode: screen;
+  animation: ma-glitch-a 2.4s steps(2, end) infinite;
+}
+.ma-glitch::after {
+  color: #00e5ff;
+  transform: translate(3px, 0);
+  mix-blend-mode: screen;
+  animation: ma-glitch-b 2.4s steps(2, end) infinite;
+}
+@keyframes ma-glitch-a {
+  0%,
+  86%,
+  100% {
+    transform: translate(-3px, 0);
+  }
+  88% {
+    transform: translate(-7px, 2px);
+  }
+  92% {
+    transform: translate(-1px, -2px);
+  }
+}
+@keyframes ma-glitch-b {
+  0%,
+  86%,
+  100% {
+    transform: translate(3px, 0);
+  }
+  90% {
+    transform: translate(8px, -2px);
+  }
+  94% {
+    transform: translate(1px, 2px);
+  }
+}
+
+/* ---------- Marquee ground text ---------- */
+@keyframes ma-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ma-marquee {
+  display: flex;
+  width: max-content;
+  animation: ma-marquee 22s linear infinite;
+}
+
+/* ---------- Underground "vine" grow ---------- */
+@keyframes ma-vine {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- Pipe hover ---------- */
+.ma-pipe {
+  transition: transform 0.14s steps(2, end);
+  cursor: pointer;
+}
+.ma-pipe:hover {
+  transform: translateY(-10px);
+}
+.ma-pipe:active {
+  transform: translateY(4px);
+}
+
+/* ---------- Buttons ---------- */
+.ma-btn {
+  font-family: "Press Start 2P", monospace;
+  background: #e52521;
+  color: #fff;
+  padding: 18px 26px;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s steps(2, end);
+  box-shadow:
+    inset 4px 4px 0 0 rgba(255, 255, 255, 0.35),
+    inset -4px -4px 0 0 rgba(0, 0, 0, 0.4),
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000;
+}
+.ma-btn:hover {
+  transform: translateY(-4px);
+}
+.ma-btn:active {
+  transform: translateY(3px);
+}
+.ma-btn-green {
+  background: #43b047;
+}
+.ma-btn-gold {
+  background: #fbd000;
+  color: #000;
+}
+
+/* ---------- Selection cursor (Mario head) ---------- */
+@keyframes ma-cursor {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+.ma-cursor {
+  animation: ma-cursor 0.6s steps(2, end) infinite;
+}
+
+/* ---------- Misc ---------- */
+.ma-nowrap {
+  white-space: nowrap;
+}
+.ma-hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+.ma-hide-scroll {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ma-root *,
+  .ma-root *::before,
+  .ma-root *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ieeeLogoBlack from '../assets/IEEE-logo-black.jpeg';
+import { PixelSprite, COIN } from './masathon/PixelArt';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,21 @@ const Navbar = () => {
                             );
                         })}
 
+                        {/* ── MASATHON: pixel-block event link ─────────── */}
+                        <Link
+                            to="/masathon"
+                            className="group relative flex items-center gap-2 px-3 py-1.5 transition-transform duration-150 hover:-translate-y-0.5"
+                            style={{
+                                background: location.pathname === '/masathon' ? '#fbd000' : '#e52521',
+                                color: location.pathname === '/masathon' ? '#000' : '#fff',
+                                boxShadow:
+                                    'inset 2px 2px 0 0 rgba(255,255,255,0.4), inset -2px -2px 0 0 rgba(0,0,0,0.35), 0 -3px 0 0 #000, 0 3px 0 0 #000, -3px 0 0 0 #000, 3px 0 0 0 #000',
+                            }}
+                        >
+                            <PixelSprite map={COIN} style={{ width: 10, height: 13 }} />
+                            <span className="text-xs font-extrabold tracking-widest">MASATHON</span>
+                        </Link>
+
                     </div>
 
                     {/* ── Mobile Controls ───────────────────────────── */}
@@ -101,6 +117,21 @@ const Navbar = () => {
                                 </Link>
                             );
                         })}
+
+                        {/* ── MASATHON (mobile) ───────────────────────── */}
+                        <Link
+                            to="/masathon"
+                            className="mt-3 flex items-center justify-center gap-2 px-3 py-2.5"
+                            style={{
+                                background: location.pathname === '/masathon' ? '#fbd000' : '#e52521',
+                                color: location.pathname === '/masathon' ? '#000' : '#fff',
+                                boxShadow:
+                                    'inset 2px 2px 0 0 rgba(255,255,255,0.4), inset -2px -2px 0 0 rgba(0,0,0,0.35), 0 -3px 0 0 #000, 0 3px 0 0 #000, -3px 0 0 0 #000, 3px 0 0 0 #000',
+                            }}
+                        >
+                            <PixelSprite map={COIN} style={{ width: 11, height: 14 }} />
+                            <span className="text-sm font-extrabold tracking-widest">MASATHON</span>
+                        </Link>
                     </div>
                 </div>
             )}
