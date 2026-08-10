@@ -47,28 +47,28 @@ gsap.registerPlugin(ScrollTrigger);
    OFFICIAL EVENT DATA — IEEE MASATHON 2026
    ============================================================ */
 
-const REGISTER_URL = 'https://forms.gle/masathon-2026-placeholder'; // ← swap for the real form
+const REGISTER_URL = 'https://unstop.com/p/ieee-masathon-2026-imagine-build-play-anna-university-au-chennai-1734082?lb=uW58KJQb&utm_medium=Share&utm_source=ieeeceg62075&utm_campaign=Online_coding_challenge';
 
 const ABOUT =
-    'IEEE MASATHON 2026 is a national-level game development hackathon conducted by the IEEE Madras Section. The competition combines creativity and technical excellence through a two-round format where teams first pitch an original game idea and then build a functional, playable prototype.';
+    'IEEE MASATHON 2026 is a national-level hackathon conducted by the IEEE Computer Society AU-CEG and IEEE Madras Section. The competition combines creativity and technical excellence through a two-round format where teams first pitch an original idea and then build a functional prototype.';
 
 const KEY_FACTS = [
     { k: 'FORMAT', v: 'NATIONAL LEVEL', s: 'Two rounds' },
     { k: 'PRIZE POOL', v: '₹40,000', s: 'Total' },
     { k: 'TEAM SIZE', v: '2 – 4', s: 'Members' },
-    { k: 'IEEE MEMBERS', v: 'FREE', s: 'Valid ID required' },
+    { k: 'IEEE MEMBERS', v: '₹250', s: 'Valid ID required' },
 ];
 
 const TRACKS = [
     { n: 'Generative AI & Intelligent Game Systems', c: '#ff2bd1', icon: STAR },
-    { n: 'Immersive AR / VR / XR', c: '#00e5ff', icon: FLOWER },
+    { n: 'Computer Vision & Perception', c: '#00e5ff', icon: FLOWER },
     { n: 'Games for Learning & Skill Development', c: '#43b047', icon: MUSHROOM },
-    { n: 'Games for Health & Well-being', c: '#ff6b6b', icon: ONEUP },
+    { n: 'Natural Language Processing & Conversational AI', c: '#ff6b6b', icon: ONEUP },
     { n: 'Multiplayer & Online Games', c: '#7b5cff', icon: COIN },
     { n: 'Accessibility-First Game Design', c: '#fbd000', icon: QBLOCK },
     { n: 'Procedural Generation & Game Tools', c: '#4ecdc4', icon: STAR },
     { n: 'Narrative, Culture & Social Impact', c: '#ff9f45', icon: MUSHROOM },
-    { n: '3D Modelling, Rendering & Technical Art', c: '#b5e853', icon: FLOWER },
+    { n: 'Responsible & Explainable AI', c: '#b5e853', icon: FLOWER },
 ];
 
 const ROUNDS = [
@@ -79,14 +79,13 @@ const ROUNDS = [
         pipe: 140,
         what: [
             'Submit via PPT (official template provided) or Video Pitch.',
-            'Must include gameplay, story, mechanics, tech stack, development plan, and team roles.',
-            'Best concepts will be shortlisted for Round 2.',
+            'Must include the concept, core idea, key features, approach, technology/AI stack (where applicable), development plan, and team roles.',
         ],
-        judged: ['Innovation', 'Feasibility', 'Creativity', 'Presentation'],
+        judged: ['Functionality', 'Technical execution', 'Gameplay experience', 'Polish', 'Documentation'],
     },
     {
         tag: 'ROUND 2',
-        title: 'Offline Prototype Development',
+        title: 'Offline Prototype Development (8 Hours)',
         accent: '#e52521',
         pipe: 200,
         note: '8 HOURS',
@@ -99,11 +98,11 @@ const ROUNDS = [
 ];
 
 const DATES = [
-    { d: '08.04.2026', iso: '2026-04-08', label: 'Event Announcement', icon: COIN },
-    { d: '15.04.2026', iso: '2026-04-15', label: 'Round 1 Concept Submission Deadline', icon: MUSHROOM },
-    { d: '17.04.2026', iso: '2026-04-17', label: 'Round 1 Results Announcement', icon: FLOWER },
-    { d: '20.04.2026', iso: '2026-04-20', label: 'Round 2 Final Registration Deadline', icon: ONEUP },
-    { d: '29.04.2026', iso: '2026-04-29', label: 'Round 2 Offline Hackathon & Demo', icon: STAR, final: true },
+    { d: '09.08.2026', iso: '2026-08-09', label: 'Round 1 Begins', icon: COIN },
+    { d: '15.08.2026', iso: '2026-08-15', label: 'Round 1 Concept Submission Deadline', icon: MUSHROOM },
+    { d: '18.08.2026', iso: '2026-08-18', label: 'Round 1 Results Announcement', icon: FLOWER },
+    { d: '21.08.2026', iso: '2026-08-21', label: 'Round 2 Final Registration Deadline', icon: ONEUP },
+    { d: '29.08.2026', iso: '2026-08-29', label: 'Round 2 Offline Hackathon & Demo', icon: STAR, final: true },
 ];
 
 const ENTRY = [
@@ -114,18 +113,18 @@ const ENTRY = [
         c: '#00e5ff',
         icon: MUSHROOM,
     },
-    { k: 'IEEE MEMBERS', v: 'FREE', s: 'Valid IEEE Membership ID required.', c: '#43b047', icon: STAR },
-    { k: 'NON-IEEE MEMBERS', v: '₹300', s: 'Per participant.', c: '#fbd000', icon: COIN },
+    { k: 'IEEE MEMBERS', v: '₹250', s: 'Per participant (Valid IEEE Membership ID required).', c: '#43b047', icon: STAR },
+    { k: 'NON-IEEE MEMBERS', v: '₹450', s: 'Per participant.', c: '#fbd000', icon: COIN },
 ];
 
 const AI_RULES = [
     'Moderate use of AI tools permitted for coding, debugging, and productivity.',
-    "Core design, implementation, and presentation must be the team's original work, with proper attribution for third-party assets.",
+    "Core design, implementation, and presentation must be the team's original work with proper attribution for third-party assets.",
 ];
 
 const SUBMIT_CHECKLIST = [
     'Round 1 — PPT on the official template, or a video pitch.',
-    'Round 1 — gameplay, story, mechanics, tech stack, development plan, team roles.',
+    'Round 1 — concept, core idea, key features, approach, technology/AI stack, development plan, team roles.',
     'Round 2 — live demonstration of the working prototype.',
     'Round 2 — source code submission.',
     'Round 2 — final presentation.',
@@ -451,9 +450,9 @@ export default function Masathon() {
 
                         <div className="ma-bevel inline-block" style={{ background: '#e2b96b', padding: '16px 26px', maxWidth: '92vw' }}>
                             <p style={{ fontSize: 'clamp(9px, 2.1vw, 15px)', color: '#000', margin: 0, lineHeight: 1.9 }}>
-                                NATIONAL-LEVEL
+                                NATIONAL LEVEL
                                 <br />
-                                GAME DEVELOPMENT HACKATHON
+                                HACKATHON
                             </p>
                         </div>
 
@@ -492,7 +491,7 @@ export default function Masathon() {
                             </div>
                         ) : (
                             <div className="ma-border inline-block" style={{ background: '#000', padding: '14px 18px', marginBottom: 34 }}>
-                                <span style={{ fontSize: 9, color: '#fbd000' }}>HACKATHON &middot; 29.04.2026</span>
+                                <span style={{ fontSize: 9, color: '#fbd000' }}>HACKATHON &middot; 29.08.2026</span>
                             </div>
                         )}
 
@@ -546,9 +545,9 @@ export default function Masathon() {
 
                         <div className="grid sm:grid-cols-3 gap-4" style={{ marginTop: 26 }}>
                             {[
-                                { k: 'CONDUCTED BY', v: 'IEEE Madras Section', c: '#00e5ff' },
+                                { k: 'CONDUCTED BY', v: 'IEEE Computer Society AU-CEG and IEEE Madras Section', c: '#00e5ff' },
                                 { k: 'VENUE', v: 'Vivek Auditorium', c: '#ff9f45' },
-                                { k: 'TAGLINE', v: 'Imagine · Build · Play', c: '#b5e853' },
+                                { k: 'TAGLINE', v: 'IMAGINE . BUILD . PLAY', c: '#b5e853' },
                             ].map((x) => (
                                 <div key={x.k} className="ma-panel ma-panel-hover ma-reveal" style={{ ['--accent']: x.c }}>
                                     <span className="ma-kicker" style={{ ['--accent']: x.c }}>
@@ -566,7 +565,7 @@ export default function Masathon() {
                     <div className="max-w-6xl mx-auto px-4">
                         <SectionHead
                             world="WORLD 1-2"
-                            title="GAME DEVELOPMENT TRACKS"
+                            title="ROUND 1 TRACKS"
                             sub="NINE TRACKS. PICK THE ONE YOUR IDEA BELONGS TO."
                             coinSlot={coinFor('tracks')}
                         />
@@ -718,8 +717,8 @@ export default function Masathon() {
                     <div className="max-w-5xl mx-auto px-4">
                         <SectionHead
                             world="WORLD 1-5"
-                            title="ELIGIBILITY & FEES"
-                            sub="OPEN TO STUDENTS NATIONWIDE."
+                            title="ELIGIBILITY & REGISTRATION FEES"
+                            sub="REG. FEE ONLY FOR ROUND 2."
                             coinSlot={coinFor('entry')}
                         />
                         <div className="grid sm:grid-cols-3 gap-5">
@@ -846,14 +845,14 @@ export default function Masathon() {
                 {/* ══════════════ REGISTER / FLAGPOLE ══════════════ */}
                 <section id="register" className="ma-section" style={{ scrollMarginTop: 120, paddingBottom: 40 }}>
                     <div className="max-w-4xl mx-auto px-4 text-center">
-                        <SectionHead world="WORLD 1-C" title="ENTER MASATHON 2026" sub="REGISTRATION CLOSES 20.04.2026." />
+                        <SectionHead world="WORLD 1-C" title="ENTER MASATHON 2026" sub="REGISTRATION CLOSES 21.08.2026." />
 
                         <div className="ma-panel ma-reveal" style={{ ['--accent']: '#fbd000', padding: 'clamp(26px,4vw,44px)' }}>
                             <div className="grid sm:grid-cols-3 gap-4" style={{ marginBottom: 30 }}>
                                 {[
-                                    ['IEEE MEMBERS', 'FREE'],
-                                    ['NON-IEEE', '₹300 / HEAD'],
-                                    ['TEAM SIZE', '2 – 4'],
+                                    ['IEEE MEMBERS', '₹250 / PERSON'],
+                                    ['NON-IEEE', '₹450 / PERSON'],
+                                    ['TEAM SIZE', '2–4'],
                                 ].map(([k, v]) => (
                                     <div key={k} style={{ background: '#000', padding: '18px 10px', border: '4px solid #1e1e2a' }}>
                                         <div style={{ fontSize: 7, color: '#43b047', marginBottom: 14 }}>{k}</div>
@@ -874,7 +873,7 @@ export default function Masathon() {
                             </a>
 
                             <p style={{ fontSize: 7.5, color: 'var(--ma-muted)', marginTop: 24 }}>
-                                ROUND 1 CONCEPT DEADLINE &middot; 15.04.2026
+                                ROUND 1 CONCEPT DEADLINE &middot; 15.08.2026
                             </p>
                         </div>
                     </div>
@@ -945,7 +944,7 @@ export default function Masathon() {
                             <PixelSprite map={USEDBLOCK} style={{ width: 28, height: 28 }} />
                         </div>
                         <p style={{ fontSize: 8, color: '#f3d9c2', lineHeight: 2.4 }}>
-                            IEEE MASATHON 2026 &middot; IEEE MADRAS SECTION
+                            IEEE MASATHON 2026 &middot; IEEE COMPUTER SOCIETY AU-CEG &middot; IEEE MADRAS SECTION
                             <br />
                             VIVEK AUDITORIUM &middot; IMAGINE . BUILD . PLAY
                         </p>
