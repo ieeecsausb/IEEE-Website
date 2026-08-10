@@ -47,7 +47,7 @@ gsap.registerPlugin(ScrollTrigger);
    OFFICIAL EVENT DATA — IEEE MASATHON 2026
    ============================================================ */
 
-const REGISTER_URL = 'https://unstop.com/p/ieee-masathon-2026-imagine-build-play-anna-university-au-chennai-1734082?lb=uW58KJQb&utm_medium=Share&utm_source=ieeeceg62075&utm_campaign=Online_coding_challenge';
+const REGISTER_URL = 'https://docs.google.com/forms/d/15ti4EU_eesn1vpdBXHUJ9fVsLudJK-RR2tyuYmvxYQ4/viewform?edit_requested=true';
 
 const ABOUT =
     'IEEE MASATHON 2026 is a national-level hackathon conducted by the IEEE Computer Society AU-CEG and IEEE Madras Section. The competition combines creativity and technical excellence through a two-round format where teams first pitch an original idea and then build a functional prototype.';
@@ -57,6 +57,7 @@ const KEY_FACTS = [
     { k: 'PRIZE POOL', v: '₹40,000', s: 'Total' },
     { k: 'TEAM SIZE', v: '2 – 4', s: 'Members' },
     { k: 'IEEE MEMBERS', v: '₹250', s: 'Valid ID required' },
+    { k: 'NON-IEEE', v: '₹450', s: 'Per participant' },
 ];
 
 const TRACKS = [
@@ -78,7 +79,7 @@ const ROUNDS = [
         accent: '#43b047',
         pipe: 140,
         what: [
-            'Submit via PPT (official template provided) or Video Pitch.',
+            'Submit via PPT (official templates provided) or Video Pitch.',
             'Must include the concept, core idea, key features, approach, technology/AI stack (where applicable), development plan, and team roles.',
         ],
         judged: ['Functionality', 'Technical execution', 'Gameplay experience', 'Polish', 'Documentation'],
@@ -99,7 +100,7 @@ const ROUNDS = [
 
 const DATES = [
     { d: '09.08.2026', iso: '2026-08-09', label: 'Round 1 Begins', icon: COIN },
-    { d: '15.08.2026', iso: '2026-08-15', label: 'Round 1 Concept Submission Deadline', icon: MUSHROOM },
+    { d: '16.08.2026', iso: '2026-08-16', label: 'Round 1 Concept Submission Deadline', icon: MUSHROOM },
     { d: '18.08.2026', iso: '2026-08-18', label: 'Round 1 Results Announcement', icon: FLOWER },
     { d: '21.08.2026', iso: '2026-08-21', label: 'Round 2 Final Registration Deadline', icon: ONEUP },
     { d: '29.08.2026', iso: '2026-08-29', label: 'Round 2 Offline Hackathon & Demo', icon: STAR, final: true },
@@ -123,7 +124,7 @@ const AI_RULES = [
 ];
 
 const SUBMIT_CHECKLIST = [
-    'Round 1 — PPT on the official template, or a video pitch.',
+    'Round 1 — PPT on the official templates, or a video pitch.',
     'Round 1 — concept, core idea, key features, approach, technology/AI stack, development plan, team roles.',
     'Round 2 — live demonstration of the working prototype.',
     'Round 2 — source code submission.',
@@ -136,6 +137,13 @@ const POSTERS = [
     { src: posterRules, cap: 'RULES & FEES' },
 ];
 
+const CONTACTS = [
+    { name: 'Shaan Narendran', phone: '+91 9790810625' },
+    { name: 'Shreem Seth', phone: '+91 9840420025' },
+    { name: 'Ojaskrisshnan', phone: '+91 9488520812' },
+    { name: 'Swayamprabha', phone: '+91 93846 70972' },
+];
+
 /* Sections that hide a collectable coin. */
 const SECTIONS = [
     { id: 'about', label: 'ABOUT' },
@@ -146,6 +154,7 @@ const SECTIONS = [
     { id: 'rules', label: 'RULES' },
     { id: 'prizes', label: 'PRIZES' },
     { id: 'posters', label: 'POSTERS' },
+    { id: 'contact', label: 'CONTACT' },
 ];
 const TOTAL_COINS = SECTIONS.length;
 
@@ -457,7 +466,7 @@ export default function Masathon() {
                         </div>
 
                         {/* facts, visible immediately — no clicking required */}
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4" style={{ margin: '38px 0 34px' }}>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4" style={{ margin: '38px 0 34px' }}>
                             {KEY_FACTS.map((f) => (
                                 <div key={f.k} className="ma-panel" style={{ ['--accent']: '#fbd000', padding: '18px 12px' }}>
                                     <span className="ma-kicker" style={{ ['--accent']: '#43b047' }}>
@@ -546,7 +555,7 @@ export default function Masathon() {
                         <div className="grid sm:grid-cols-3 gap-4" style={{ marginTop: 26 }}>
                             {[
                                 { k: 'CONDUCTED BY', v: 'IEEE Computer Society AU-CEG and IEEE Madras Section', c: '#00e5ff' },
-                                { k: 'VENUE', v: 'Vivek Auditorium', c: '#ff9f45' },
+                                { k: 'VENUE', v: 'Vivekananda Auditorium, Anna University CEG Campus, Sardar Patel Road, Guindy, Chennai - 600025', c: '#ff9f45' },
                                 { k: 'TAGLINE', v: 'IMAGINE . BUILD . PLAY', c: '#b5e853' },
                             ].map((x) => (
                                 <div key={x.k} className="ma-panel ma-panel-hover ma-reveal" style={{ ['--accent']: x.c }}>
@@ -842,6 +851,21 @@ export default function Masathon() {
                     </div>
                 </section>
 
+                {/* ══════════════ CONTACT ══════════════ */}
+                <section id="contact" className="ma-section" style={{ scrollMarginTop: 120 }}>
+                    <div className="max-w-4xl mx-auto px-4">
+                        <SectionHead world="WORLD 1-8" title="CONTACT US" coinSlot={coinFor('contact')} />
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            {CONTACTS.map((c) => (
+                                <div key={c.name} className="ma-panel ma-panel-hover ma-reveal" style={{ ['--accent']: '#fbd000', padding: '22px 20px' }}>
+                                    <div style={{ fontSize: 9.5, color: '#fff', marginBottom: 10 }}>{c.name}</div>
+                                    <a href={`tel:${c.phone.replace(/\s/g, '')}`} style={{ fontSize: 8.5, color: '#fbd000', textDecoration: 'none' }}>{c.phone}</a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
                 {/* ══════════════ REGISTER / FLAGPOLE ══════════════ */}
                 <section id="register" className="ma-section" style={{ scrollMarginTop: 120, paddingBottom: 40 }}>
                     <div className="max-w-4xl mx-auto px-4 text-center">
@@ -873,7 +897,7 @@ export default function Masathon() {
                             </a>
 
                             <p style={{ fontSize: 7.5, color: 'var(--ma-muted)', marginTop: 24 }}>
-                                ROUND 1 CONCEPT DEADLINE &middot; 15.08.2026
+                                ROUND 1 CONCEPT DEADLINE &middot; 16.08.2026
                             </p>
                         </div>
                     </div>
@@ -946,7 +970,7 @@ export default function Masathon() {
                         <p style={{ fontSize: 8, color: '#f3d9c2', lineHeight: 2.4 }}>
                             IEEE MASATHON 2026 &middot; IEEE COMPUTER SOCIETY AU-CEG &middot; IEEE MADRAS SECTION
                             <br />
-                            VIVEK AUDITORIUM &middot; IMAGINE . BUILD . PLAY
+                            VIVEKANANDA AUDITORIUM, CEG CAMPUS &middot; IMAGINE . BUILD . PLAY
                         </p>
                         <p style={{ fontSize: 6.5, color: '#c9a68c', marginTop: 18 }}>
                             FAN-MADE PIXEL ART DRAWN FOR THIS PAGE. NOT AFFILIATED WITH NINTENDO.
