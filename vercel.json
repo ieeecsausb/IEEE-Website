@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd website-ieee/frontend && npm install --include=dev",
+  "buildCommand": "cd website-ieee/frontend && npm run build",
+  "outputDirectory": "website-ieee/frontend/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

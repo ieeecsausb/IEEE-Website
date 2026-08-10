@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Members from './pages/Members';
 import Events from './pages/Events';
+import Masathon from './pages/Masathon';
 
 import Contact from './pages/Contact';
 import { useEffect } from 'react';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/members" element={<Members />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/masathon" element={<Masathon />} />
 
             <Route path="/contact" element={<Contact />} />
           </Routes>
