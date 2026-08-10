@@ -57,7 +57,7 @@ const KEY_FACTS = [
     { k: 'PRIZE POOL', v: '₹40,000', s: 'Total' },
     { k: 'TEAM SIZE', v: '2 – 4', s: 'Members' },
     { k: 'IEEE MEMBERS', v: '₹250', s: 'Valid ID required' },
-    { k: 'NON-IEEE', v: '₹450', s: 'Per participant' },
+    { k: 'NON-IEEE', v: '₹500', s: 'Per participant' },
 ];
 
 const TRACKS = [
@@ -115,7 +115,7 @@ const ENTRY = [
         icon: MUSHROOM,
     },
     { k: 'IEEE MEMBERS', v: '₹250', s: 'Per participant (Valid IEEE Membership ID required).', c: '#43b047', icon: STAR },
-    { k: 'NON-IEEE MEMBERS', v: '₹450', s: 'Per participant.', c: '#fbd000', icon: COIN },
+    { k: 'NON-IEEE MEMBERS', v: '₹500', s: 'Per participant.', c: '#fbd000', icon: COIN },
 ];
 
 const AI_RULES = [
@@ -875,7 +875,7 @@ export default function Masathon() {
                             <div className="grid sm:grid-cols-3 gap-4" style={{ marginBottom: 30 }}>
                                 {[
                                     ['IEEE MEMBERS', '₹250 / PERSON'],
-                                    ['NON-IEEE', '₹450 / PERSON'],
+                                    ['NON-IEEE', '₹500 / PERSON'],
                                     ['TEAM SIZE', '2–4'],
                                 ].map(([k, v]) => (
                                     <div key={k} style={{ background: '#000', padding: '18px 10px', border: '4px solid #1e1e2a' }}>
