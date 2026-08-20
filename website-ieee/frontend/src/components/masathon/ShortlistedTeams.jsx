@@ -66,7 +66,7 @@ export default function ShortlistedTeams({ play }) {
                     <PixelSprite map={STAR} className="ma-star-hue" style={{ width: 52, height: 52 }} />
                 </div>
                 <div>
-                    <span>ROUND 1 COMPLETE</span>
+                    <span>SHORTLIST ANNOUNCED</span>
                     <strong>PLAYER SELECT: ROUND 2</strong>
                     <p>These 34 teams have unlocked the offline prototype-development round.</p>
                 </div>
@@ -139,7 +139,7 @@ export default function ShortlistedTeams({ play }) {
             </div>
 
             <p className="ma-shortlist-note ma-reveal">
-                SHORTLISTED TEAMS: WATCH FOR OFFICIAL ROUND 2 INSTRUCTIONS FROM THE ORGANIZERS.
+                SHORTLISTED TEAMS: CONFIRM YOUR PARTICIPATION BY 21/08/2026 AT 12:00 PM (NOON).
             </p>
         </div>
     );
