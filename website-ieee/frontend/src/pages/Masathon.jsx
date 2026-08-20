@@ -15,9 +15,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/masathon.css';
-import posterMain from '../assets/upcoming-events/masathon-poster.png';
-import posterAbout from '../assets/upcoming-events/masathon-about.png';
-import posterRules from '../assets/upcoming-events/masathon-rules.png';
 import {
     PixelSprite,
     MARIO_STAND,
@@ -48,114 +45,92 @@ gsap.registerPlugin(ScrollTrigger);
    OFFICIAL EVENT DATA — IEEE MASATHON 2026
    ============================================================ */
 
-const REGISTER_URL = 'https://docs.google.com/forms/d/15ti4EU_eesn1vpdBXHUJ9fVsLudJK-RR2tyuYmvxYQ4/viewform?edit_requested=true';
+const ROUND_TWO_FORM_URL =
+    'https://docs.google.com/forms/d/e/1FAIpQLSfMPD4rvF1BeIo_6DL23q8ySL_9EJGvQDf6FlQ6ID2M_vAWXg/viewform?usp=dialog';
 
 const ABOUT =
-    'IEEE MASATHON 2026 is a national-level hackathon conducted by the IEEE Computer Society AU-CEG and IEEE Madras Section. The competition combines creativity and technical excellence through a two-round format where teams first pitch an original idea and then build a functional prototype.';
+    'IEEE MASATHON 2026 is a national-level hackathon conducted by the IEEE Computer Society AU-CEG and IEEE Madras Section. The 34 shortlisted teams now advance to an 8-hour offline prototype-development challenge with live mentor guidance, a working demonstration, source-code submission, and final presentation.';
 
 const KEY_FACTS = [
-    { k: 'FORMAT', v: 'NATIONAL LEVEL', s: 'Two rounds' },
+    { k: 'FORMAT', v: 'ROUND 2', s: '8-hour offline hackathon' },
     { k: 'PRIZE POOL', v: '₹40,000', s: 'Total' },
-    { k: 'TEAM SIZE', v: '2 – 4', s: 'Members' },
-    { k: 'IEEE MEMBERS', v: '₹250', s: 'Valid ID required' },
-    { k: 'NON-IEEE', v: '₹500', s: 'Per participant' },
+    { k: 'TEAM SIZE', v: '2 – 4', s: 'Same shortlisted team' },
+    { k: 'CONFIRMATION', v: '₹250', s: 'Per team' },
+    { k: 'REFUND', v: '100%', s: 'After participating' },
 ];
 
-const TRACKS = [
-    { n: 'Generative AI & Intelligent Game Systems', c: '#ff2bd1', icon: STAR },
-    { n: 'Computer Vision & Perception', c: '#00e5ff', icon: FLOWER },
-    { n: 'Games for Learning & Skill Development', c: '#43b047', icon: MUSHROOM },
-    { n: 'Natural Language Processing & Conversational AI', c: '#ff6b6b', icon: ONEUP },
-    { n: 'Multiplayer & Online Games', c: '#7b5cff', icon: COIN },
-    { n: 'Accessibility-First Game Design', c: '#fbd000', icon: QBLOCK },
-    { n: 'Procedural Generation & Game Tools', c: '#4ecdc4', icon: STAR },
-    { n: 'Narrative, Culture & Social Impact', c: '#ff9f45', icon: MUSHROOM },
-    { n: 'Responsible & Explainable AI', c: '#b5e853', icon: FLOWER },
-];
-
-const ROUNDS = [
-    {
-        tag: 'ROUND 1',
-        title: 'Online Concept Submission',
-        accent: '#43b047',
-        pipe: 140,
-        what: [
-            'Submit via PPT (official templates provided) or Video Pitch.',
-            'Must include the concept, core idea, key features, approach, technology/AI stack (where applicable), development plan, and team roles.',
-        ],
-        judged: ['Functionality', 'Technical execution', 'Gameplay experience', 'Polish', 'Documentation'],
-    },
-    {
-        tag: 'ROUND 2',
-        title: 'Offline Prototype Development (8 Hours)',
-        accent: '#e52521',
-        pipe: 200,
-        note: '8 HOURS',
-        what: [
-            '8-hour offline hackathon with live mentor guidance.',
-            'Requires live demonstration, source code submission, and final presentation.',
-        ],
-        judged: ['Functionality', 'Technical execution', 'Gameplay experience', 'Polish', 'Documentation'],
-    },
-];
+const ROUND_TWO = {
+    tag: 'ROUND 2',
+    title: 'Offline Prototype Development',
+    accent: '#e52521',
+    pipe: 200,
+    note: '8 HOURS',
+    what: [
+        'An 8-hour, in-person hackathon with live guidance from organizers and mentors.',
+        'Teams must present a live demonstration, submit their source code, and deliver a final presentation.',
+        'The registered team must remain the same as the shortlisted submission.',
+    ],
+    judged: ['Functionality', 'Technical execution', 'Gameplay experience', 'Polish', 'Documentation'],
+};
 
 const DATES = [
-    { d: '09.08.2026', iso: '2026-08-09', label: 'Round 1 Begins', icon: COIN },
-    { d: '16.08.2026', iso: '2026-08-16', label: 'Round 1 Concept Submission Deadline', icon: MUSHROOM },
-    { d: '18.08.2026', iso: '2026-08-18', label: 'Round 1 Results Announcement', icon: FLOWER },
-    { d: '21.08.2026', iso: '2026-08-21', label: 'Round 2 Final Registration Deadline', icon: ONEUP },
-    { d: '29.08.2026', iso: '2026-08-29', label: 'Round 2 Offline Hackathon & Demo', icon: STAR, final: true },
+    {
+        d: '21/08/2026',
+        iso: '2026-08-21',
+        time: '12:00:00',
+        label: 'Round 2 Participation Confirmation Deadline · 12:00 PM',
+        icon: ONEUP,
+    },
+    { d: '29/08/2026', iso: '2026-08-29', time: '09:00:00', label: 'Round 2 Offline Hackathon & Demo', icon: STAR, final: true },
 ];
 
 const ENTRY = [
     {
-        k: 'TEAM SIZE',
-        v: '2 – 4 MEMBERS',
-        s: 'Cross-college and interdisciplinary teams encouraged.',
+        k: 'TEAM REQUIREMENT',
+        v: 'SAME TEAM',
+        s: 'The team must remain unchanged from the shortlisted submission.',
         c: '#00e5ff',
         icon: MUSHROOM,
     },
-    { k: 'IEEE MEMBERS', v: '₹250', s: 'Per participant (Valid IEEE Membership ID required).', c: '#43b047', icon: STAR },
-    { k: 'NON-IEEE MEMBERS', v: '₹500', s: 'Per participant.', c: '#fbd000', icon: COIN },
+    { k: 'CONFIRMATION FEE', v: '₹250 / TEAM', s: 'Upload proof of payment in the confirmation form.', c: '#fbd000', icon: COIN },
+    {
+        k: 'FULL REFUND',
+        v: 'AFTER EVENT',
+        s: 'Refunded entirely after the hackathon only when the registered team participates in Round 2.',
+        c: '#43b047',
+        icon: STAR,
+    },
 ];
 
 const AI_RULES = [
-    'Moderate use of AI tools permitted for coding, debugging, and productivity.',
-    "Core design, implementation, and presentation must be the team's original work with proper attribution for third-party assets.",
+    'AI tools and publicly available libraries or assets are permitted when their use complies with applicable licenses.',
+    'Teams must disclose significant AI-generated or third-party components wherever required.',
+    'All participants must follow the instructions of organizers and mentors throughout the hackathon.',
+    "The judges' decision is final. The organizers may disqualify entries that violate the rules, contain inappropriate content, or fail to meet the requirements.",
 ];
 
 const SUBMIT_CHECKLIST = [
-    'Round 1 — PPT on the official templates, or a video pitch.',
-    'Round 1 — concept, core idea, key features, approach, technology/AI stack, development plan, team roles.',
-    'Round 2 — live demonstration of the working prototype.',
-    'Round 2 — source code submission.',
-    'Round 2 — final presentation.',
-];
-
-const POSTERS = [
-    { src: posterMain, cap: 'MASATHON' },
-    { src: posterAbout, cap: 'ABOUT & TRACKS' },
-    { src: posterRules, cap: 'RULES & FEES' },
+    'Complete the Round 2 confirmation form by 21 August 2026, 12:00 PM (noon).',
+    'Keep the registered team unchanged from the shortlisted submission.',
+    'Pay the ₹250 per-team confirmation fee and upload proof of payment.',
+    'Attend and participate in Round 2 to receive the full fee refund after the hackathon.',
 ];
 
 const CONTACTS = [
     { name: 'Shaan Narendran', phone: '+91 9790810625' },
     { name: 'Shreem Seth', phone: '+91 9840420025' },
-    { name: 'Ojaskrisshnan', phone: '+91 9488520812' },
-    { name: 'Swayamprabha', phone: '+91 93846 70972' },
+    { name: 'C. S. Abhinav', phone: '+91 9940219278' },
 ];
 
 /* Sections that hide a collectable coin. */
 const SECTIONS = [
     { id: 'about', label: 'ABOUT' },
-    { id: 'tracks', label: 'TRACKS' },
     { id: 'rounds', label: 'FORMAT' },
     { id: 'dates', label: 'DATES' },
     { id: 'shortlist', label: 'RESULTS' },
-    { id: 'entry', label: 'ENTRY' },
+    { id: 'entry', label: 'CONFIRM' },
     { id: 'rules', label: 'RULES' },
     { id: 'prizes', label: 'PRIZES' },
-    { id: 'posters', label: 'POSTERS' },
     { id: 'contact', label: 'CONTACT' },
 ];
 const TOTAL_COINS = SECTIONS.length;
@@ -220,7 +195,6 @@ export default function Masathon() {
     const [active, setActive] = useState('about');
     const [flagDown, setFlagDown] = useState(false);
     const [cleared, setCleared] = useState(false);
-    const [lightbox, setLightbox] = useState(null);
     const [heroJump, setHeroJump] = useState(false);
     const [now, setNow] = useState(() => Date.now());
 
@@ -228,10 +202,10 @@ export default function Masathon() {
     const allCoins = coinCount === TOTAL_COINS;
 
     /* ---------- next milestone + countdown ---------- */
-    const nextDate = useMemo(() => DATES.find((d) => new Date(`${d.iso}T09:00:00+05:30`).getTime() > now), [now]);
+    const nextDate = useMemo(() => DATES.find((d) => new Date(`${d.iso}T${d.time}+05:30`).getTime() > now), [now]);
     const countdown = useMemo(() => {
         if (!nextDate) return null;
-        const diff = new Date(`${nextDate.iso}T09:00:00+05:30`).getTime() - now;
+        const diff = new Date(`${nextDate.iso}T${nextDate.time}+05:30`).getTime() - now;
         return {
             d: Math.floor(diff / 86400000),
             h: Math.floor((diff / 3600000) % 24),
@@ -399,10 +373,10 @@ export default function Masathon() {
 
                     <button
                         type="button"
-                        onClick={() => goTo('register')}
+                        onClick={() => goTo('confirm')}
                         className="ma-btn ma-btn-gold ma-btn-sm shrink-0 hidden sm:inline-block"
                     >
-                        REGISTER
+                        CONFIRM
                     </button>
                 </div>
             </nav>
@@ -469,8 +443,8 @@ export default function Masathon() {
 
                         <div className="ma-hero-result ma-reveal">
                             <div className="ma-hero-result-copy">
-                                <span className="ma-blink">★ ROUND 1 RESULTS ARE LIVE</span>
-                                <strong>34 TEAMS ADVANCE TO ROUND 2</strong>
+                                <span className="ma-blink">★ ROUND 2 SHORTLIST IS LIVE</span>
+                                <strong>34 TEAMS QUALIFIED</strong>
                             </div>
                             <button type="button" className="ma-btn ma-btn-green ma-btn-sm" onClick={() => goTo('shortlist')}>
                                 VIEW SHORTLIST &#9654;
@@ -518,14 +492,14 @@ export default function Masathon() {
 
                         <div className="flex flex-wrap justify-center gap-4">
                             <a
-                                href={REGISTER_URL}
+                                href={ROUND_TWO_FORM_URL}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="ma-btn ma-btn-gold"
                                 style={{ fontSize: 'clamp(9px,1.9vw,13px)' }}
                                 onClick={() => play('powerup')}
                             >
-                                REGISTER NOW &#9654;
+                                CONFIRM ROUND 2 &#9654;
                             </a>
                             <button
                                 type="button"
@@ -581,110 +555,79 @@ export default function Masathon() {
                     </div>
                 </section>
 
-                {/* ══════════════ TRACKS ══════════════ */}
-                <section id="tracks" className="ma-section" style={{ scrollMarginTop: 120 }}>
-                    <div className="max-w-6xl mx-auto px-4">
-                        <SectionHead
-                            world="WORLD 1-2"
-                            title="ROUND 1 TRACKS"
-                            sub="NINE TRACKS. PICK THE ONE YOUR IDEA BELONGS TO."
-                            coinSlot={coinFor('tracks')}
-                        />
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                            {TRACKS.map((t, i) => (
-                                <article
-                                    key={t.n}
-                                    className="ma-panel ma-panel-hover ma-reveal"
-                                    style={{ ['--accent']: t.c }}
-                                    onMouseEnter={() => play('select')}
-                                >
-                                    <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
-                                        <PixelSprite map={t.icon} style={{ width: 22, height: 22, flexShrink: 0 }} />
-                                        <span style={{ fontSize: 8, color: t.c }}>TRACK {pad(i + 1)}</span>
-                                    </div>
-                                    <h3 style={{ fontSize: 9.5, color: '#fff', margin: 0, lineHeight: 2.1 }}>{t.n}</h3>
-                                </article>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* ══════════════ FORMAT ══════════════ */}
+                {/* ══════════════ ROUND 2 FORMAT ══════════════ */}
                 <section id="rounds" className="ma-section" style={{ scrollMarginTop: 120 }}>
-                    <div className="max-w-6xl mx-auto px-4">
+                    <div className="max-w-4xl mx-auto px-4">
                         <SectionHead
-                            world="WORLD 1-3"
-                            title="HACKATHON FORMAT"
-                            sub="TWO ROUNDS. PITCH THE IDEA, THEN BUILD IT."
+                            world="WORLD 2-1"
+                            title="ROUND 2 EVENT FORMAT"
+                            sub="BUILD, DEMONSTRATE, AND PRESENT YOUR WORKING PROTOTYPE."
                             coinSlot={coinFor('rounds')}
                         />
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {ROUNDS.map((r) => (
-                                <article key={r.tag} className="ma-panel ma-reveal" style={{ ['--accent']: r.accent, padding: 'clamp(24px,3vw,34px)' }}>
-                                    <div className="flex items-start justify-between gap-4" style={{ marginBottom: 22 }}>
-                                        <div>
-                                            <span className="ma-kicker" style={{ ['--accent']: r.accent }}>
-                                                {r.tag}
-                                            </span>
-                                            <h3 style={{ fontSize: 'clamp(10px,2vw,13px)', color: '#fff', margin: 0, lineHeight: 2 }}>
-                                                {r.title}
-                                            </h3>
-                                            {r.note ? (
-                                                <span
-                                                    className="ma-border inline-block"
-                                                    style={{ background: r.accent, color: '#fff', fontSize: 8, padding: '7px 10px', marginTop: 16 }}
-                                                >
-                                                    {r.note}
-                                                </span>
-                                            ) : null}
-                                        </div>
-                                        <PixelPipe width={68} height={r.pipe} className="shrink-0 hidden sm:block" />
-                                    </div>
+                        <article
+                            className="ma-panel ma-reveal"
+                            style={{ ['--accent']: ROUND_TWO.accent, padding: 'clamp(24px,3vw,34px)' }}
+                        >
+                            <div className="flex items-start justify-between gap-4" style={{ marginBottom: 22 }}>
+                                <div>
+                                    <span className="ma-kicker" style={{ ['--accent']: ROUND_TWO.accent }}>
+                                        {ROUND_TWO.tag}
+                                    </span>
+                                    <h3 style={{ fontSize: 'clamp(10px,2vw,13px)', color: '#fff', margin: 0, lineHeight: 2 }}>
+                                        {ROUND_TWO.title}
+                                    </h3>
+                                    <span
+                                        className="ma-border inline-block"
+                                        style={{ background: ROUND_TWO.accent, color: '#fff', fontSize: 8, padding: '7px 10px', marginTop: 16 }}
+                                    >
+                                        {ROUND_TWO.note}
+                                    </span>
+                                </div>
+                                <PixelPipe width={68} height={ROUND_TWO.pipe} className="shrink-0 hidden sm:block" />
+                            </div>
 
-                                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-                                        {r.what.map((w) => (
-                                            <li key={w} className="flex items-start gap-3" style={{ marginBottom: 14 }}>
-                                                <PixelSprite map={COIN} style={{ width: 11, height: 14, flexShrink: 0, marginTop: 4 }} />
-                                                <span style={{ fontSize: 8.5, color: 'var(--ma-body)', lineHeight: 2.3 }}>{w}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
+                                {ROUND_TWO.what.map((item) => (
+                                    <li key={item} className="flex items-start gap-3" style={{ marginBottom: 14 }}>
+                                        <PixelSprite map={COIN} style={{ width: 11, height: 14, flexShrink: 0, marginTop: 4 }} />
+                                        <span style={{ fontSize: 8.5, color: 'var(--ma-body)', lineHeight: 2.3 }}>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
 
-                                    <div style={{ borderTop: '4px solid #000', paddingTop: 20 }}>
-                                        <span className="ma-kicker" style={{ ['--accent']: '#fbd000' }}>
-                                            EVALUATED ON
+                            <div style={{ borderTop: '4px solid #000', paddingTop: 20 }}>
+                                <span className="ma-kicker" style={{ ['--accent']: '#fbd000' }}>
+                                    EVALUATED ON
+                                </span>
+                                <div className="flex flex-wrap gap-2">
+                                    {ROUND_TWO.judged.map((item) => (
+                                        <span
+                                            key={item}
+                                            style={{
+                                                fontSize: 7.5,
+                                                color: '#fff',
+                                                background: '#000',
+                                                border: `3px solid ${ROUND_TWO.accent}`,
+                                                padding: '7px 9px',
+                                            }}
+                                        >
+                                            {item}
                                         </span>
-                                        <div className="flex flex-wrap gap-2">
-                                            {r.judged.map((j) => (
-                                                <span
-                                                    key={j}
-                                                    style={{
-                                                        fontSize: 7.5,
-                                                        color: '#fff',
-                                                        background: '#000',
-                                                        border: `3px solid ${r.accent}`,
-                                                        padding: '7px 9px',
-                                                    }}
-                                                >
-                                                    {j}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </section>
 
                 {/* ══════════════ DATES ══════════════ */}
                 <section id="dates" className="ma-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-4xl mx-auto px-4">
-                        <SectionHead world="WORLD 1-4" title="IMPORTANT DATES" sub="FIVE CHECKPOINTS TO THE FINISH." coinSlot={coinFor('dates')} />
+                        <SectionHead world="WORLD 2-2" title="IMPORTANT DATES" sub="TWO CHECKPOINTS REMAIN." coinSlot={coinFor('dates')} />
                         <div className="relative">
                             <div className="ma-rail hidden sm:block" />
                             {DATES.map((d) => {
-                                const past = new Date(`${d.iso}T09:00:00+05:30`).getTime() < now;
+                                const past = new Date(`${d.iso}T${d.time}+05:30`).getTime() < now;
                                 const isNext = nextDate?.iso === d.iso;
                                 return (
                                     <div key={d.iso} className="ma-reveal flex items-start gap-4 sm:gap-6" style={{ marginBottom: 18 }}>
@@ -737,12 +680,28 @@ export default function Masathon() {
                 <section id="shortlist" className="ma-section ma-shortlist-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-7xl mx-auto px-4">
                         <SectionHead
-                            world="ROUND 1 CLEAR"
+                            world="QUALIFIER ROSTER"
                             title="ROUND 2 SHORTLIST"
-                            sub="THE RESULTS ARE IN. 34 TEAMS HAVE UNLOCKED THE NEXT LEVEL."
+                            sub="34 TEAMS HAVE UNLOCKED THE OFFLINE HACKATHON."
                             coinSlot={coinFor('shortlist')}
                         />
                         <ShortlistedTeams play={play} />
+                        <div className="ma-shortlist-confirm ma-reveal">
+                            <div>
+                                <span>SHORTLISTED TEAM?</span>
+                                <strong>CONFIRM YOUR ROUND 2 PARTICIPATION</strong>
+                                <p>Submit the form by 21 August 2026, 12:00 PM (noon).</p>
+                            </div>
+                            <a
+                                href={ROUND_TWO_FORM_URL}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="ma-btn ma-btn-gold"
+                                onClick={() => play('powerup')}
+                            >
+                                OPEN FORM &#9654;
+                            </a>
+                        </div>
                     </div>
                 </section>
 
@@ -750,9 +709,9 @@ export default function Masathon() {
                 <section id="entry" className="ma-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-5xl mx-auto px-4">
                         <SectionHead
-                            world="WORLD 1-5"
-                            title="ELIGIBILITY & REGISTRATION FEES"
-                            sub="REG. FEE ONLY FOR ROUND 2."
+                            world="WORLD 2-3"
+                            title="ROUND 2 CONFIRMATION"
+                            sub="₹250 PER TEAM · FULLY REFUNDED AFTER PARTICIPATION."
                             coinSlot={coinFor('entry')}
                         />
                         <div className="grid sm:grid-cols-3 gap-5">
@@ -773,7 +732,7 @@ export default function Masathon() {
                 {/* ══════════════ RULES ══════════════ */}
                 <section id="rules" className="ma-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-5xl mx-auto px-4">
-                        <SectionHead world="WORLD 1-6" title="RULES & SUBMISSIONS" sub="READ THIS BEFORE YOU BUILD." coinSlot={coinFor('rules')} />
+                        <SectionHead world="WORLD 2-4" title="RULES & REQUIREMENTS" sub="READ THIS BEFORE YOU CONFIRM." coinSlot={coinFor('rules')} />
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="ma-panel ma-reveal" style={{ ['--accent']: '#ff2bd1', padding: 'clamp(24px,3vw,32px)' }}>
                                 <div className="flex items-center gap-3" style={{ marginBottom: 22 }}>
@@ -798,7 +757,7 @@ export default function Masathon() {
                             <div className="ma-panel ma-reveal" style={{ ['--accent']: '#00e5ff', padding: 'clamp(24px,3vw,32px)' }}>
                                 <div className="flex items-center gap-3" style={{ marginBottom: 22 }}>
                                     <PixelSprite map={QBLOCK} style={{ width: 24, height: 24 }} />
-                                    <h3 style={{ fontSize: 10, color: '#fff', margin: 0 }}>WHAT YOU SUBMIT</h3>
+                                    <h3 style={{ fontSize: 10, color: '#fff', margin: 0 }}>CONFIRMATION CHECKLIST</h3>
                                 </div>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                     {SUBMIT_CHECKLIST.map((s) => (
@@ -816,7 +775,7 @@ export default function Masathon() {
                 {/* ══════════════ PRIZES ══════════════ */}
                 <section id="prizes" className="ma-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-5xl mx-auto px-4">
-                        <SectionHead world="WORLD 1-7" title="PRIZE POOL ₹40,000" sub="AWARDED ACROSS THE WINNING TEAMS." coinSlot={coinFor('prizes')} />
+                        <SectionHead world="WORLD 2-5" title="PRIZE POOL ₹40,000" sub="AWARDED ACROSS THE WINNING TEAMS." coinSlot={coinFor('prizes')} />
 
                         <div className="flex items-end justify-center gap-2 sm:gap-6" style={{ marginBottom: 34 }}>
                             {[
@@ -852,35 +811,11 @@ export default function Masathon() {
                     </div>
                 </section>
 
-                {/* ══════════════ POSTERS ══════════════ */}
-                <section id="posters" className="ma-section" style={{ scrollMarginTop: 120 }}>
-                    <div className="max-w-5xl mx-auto px-4">
-                        <SectionHead world="BONUS" title="OFFICIAL POSTERS" sub="TAP ANY CARTRIDGE TO ENLARGE." coinSlot={coinFor('posters')} />
-                        <div className="grid sm:grid-cols-3 gap-5">
-                            {POSTERS.map((p) => (
-                                <button
-                                    key={p.cap}
-                                    type="button"
-                                    className="ma-reveal ma-border"
-                                    onClick={() => {
-                                        play('powerup');
-                                        setLightbox(p.src);
-                                    }}
-                                    style={{ background: '#1b1b26', padding: 12, cursor: 'zoom-in' }}
-                                >
-                                    <img src={p.src} alt={`Masathon poster — ${p.cap}`} style={{ display: 'block', width: '100%', border: '3px solid #000' }} />
-                                    <div style={{ fontSize: 7.5, color: '#fbd000', marginTop: 12 }}>{p.cap}</div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
                 {/* ══════════════ CONTACT ══════════════ */}
                 <section id="contact" className="ma-section" style={{ scrollMarginTop: 120 }}>
                     <div className="max-w-4xl mx-auto px-4">
-                        <SectionHead world="WORLD 1-8" title="CONTACT US" coinSlot={coinFor('contact')} />
-                        <div className="grid sm:grid-cols-2 gap-4">
+                        <SectionHead world="WORLD 2-6" title="CONTACT US" coinSlot={coinFor('contact')} />
+                        <div className="grid sm:grid-cols-3 gap-4">
                             {CONTACTS.map((c) => (
                                 <div key={c.name} className="ma-panel ma-panel-hover ma-reveal" style={{ ['--accent']: '#fbd000', padding: '22px 20px' }}>
                                     <div style={{ fontSize: 9.5, color: '#fff', marginBottom: 10 }}>{c.name}</div>
@@ -891,38 +826,40 @@ export default function Masathon() {
                     </div>
                 </section>
 
-                {/* ══════════════ REGISTER / FLAGPOLE ══════════════ */}
-                <section id="register" className="ma-section" style={{ scrollMarginTop: 120, paddingBottom: 40 }}>
+                {/* ══════════════ ROUND 2 CONFIRMATION / FLAGPOLE ══════════════ */}
+                <section id="confirm" className="ma-section" style={{ scrollMarginTop: 120, paddingBottom: 40 }}>
                     <div className="max-w-4xl mx-auto px-4 text-center">
-                        <SectionHead world="WORLD 1-C" title="ENTER MASATHON 2026" sub="REGISTRATION CLOSES 21.08.2026." />
+                        <SectionHead world="WORLD 2-C" title="CONFIRM ROUND 2" sub="FORM CLOSES 21/08/2026 · 12:00 PM (NOON)." />
 
                         <div className="ma-panel ma-reveal" style={{ ['--accent']: '#fbd000', padding: 'clamp(26px,4vw,44px)' }}>
                             <div className="grid sm:grid-cols-3 gap-4" style={{ marginBottom: 30 }}>
                                 {[
-                                    ['IEEE MEMBERS', '₹250 / PERSON'],
-                                    ['NON-IEEE', '₹500 / PERSON'],
-                                    ['TEAM SIZE', '2–4'],
+                                    ['CONFIRMATION FEE', '₹250 / TEAM'],
+                                    ['REFUND', '100% AFTER EVENT'],
+                                    ['REQUIRED', 'PAYMENT PROOF'],
                                 ].map(([k, v]) => (
                                     <div key={k} style={{ background: '#000', padding: '18px 10px', border: '4px solid #1e1e2a' }}>
                                         <div style={{ fontSize: 7, color: '#43b047', marginBottom: 14 }}>{k}</div>
-                                        <div style={{ fontSize: 10, color: '#fff' }}>{v}</div>
+                                        <div style={{ fontSize: 10, color: '#fff', lineHeight: 1.8 }}>{v}</div>
                                     </div>
                                 ))}
                             </div>
 
                             <a
-                                href={REGISTER_URL}
+                                href={ROUND_TWO_FORM_URL}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="ma-btn ma-btn-gold"
                                 style={{ fontSize: 'clamp(10px,2vw,14px)' }}
                                 onClick={() => play('powerup')}
                             >
-                                REGISTER YOUR TEAM &#9654;
+                                OPEN CONFIRMATION FORM &#9654;
                             </a>
 
-                            <p style={{ fontSize: 7.5, color: 'var(--ma-muted)', marginTop: 24 }}>
-                                ROUND 1 CONCEPT DEADLINE &middot; 16.08.2026
+                            <p style={{ fontSize: 7.5, color: 'var(--ma-muted)', marginTop: 24, lineHeight: 2.2 }}>
+                                THE FEE IS REFUNDED IN FULL AFTER THE HACKATHON IF THE REGISTERED TEAM PARTICIPATES IN ROUND 2.
+                                <br />
+                                TEAMS THAT DO NOT ATTEND ARE NOT ELIGIBLE FOR A REFUND.
                             </p>
                         </div>
                     </div>
@@ -1029,21 +966,6 @@ export default function Masathon() {
                     </button>
                 </div>
             </div>
-
-            {/* ─────────── poster lightbox ─────────── */}
-            {lightbox && (
-                <div
-                    role="presentation"
-                    onClick={() => setLightbox(null)}
-                    className="fixed inset-0 flex items-center justify-center p-4"
-                    style={{ background: 'rgba(0,0,0,0.94)', zIndex: 9998, cursor: 'zoom-out' }}
-                >
-                    <img src={lightbox} alt="Masathon poster enlarged" style={{ maxHeight: '86vh', maxWidth: '92vw', border: '6px solid #fbd000' }} />
-                    <button type="button" onClick={() => setLightbox(null)} className="ma-btn ma-btn-sm" style={{ position: 'absolute', top: 120, right: 20 }}>
-                        CLOSE &times;
-                    </button>
-                </div>
-            )}
         </div>
     );
 }
