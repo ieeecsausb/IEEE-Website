@@ -40,6 +40,7 @@ import {
     PixelFlagpole,
 } from '../components/masathon/PixelArt';
 import { useChiptune } from '../components/masathon/useChiptune';
+import ShortlistedTeams from '../components/masathon/ShortlistedTeams';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -150,6 +151,7 @@ const SECTIONS = [
     { id: 'tracks', label: 'TRACKS' },
     { id: 'rounds', label: 'FORMAT' },
     { id: 'dates', label: 'DATES' },
+    { id: 'shortlist', label: 'RESULTS' },
     { id: 'entry', label: 'ENTRY' },
     { id: 'rules', label: 'RULES' },
     { id: 'prizes', label: 'PRIZES' },
@@ -465,8 +467,18 @@ export default function Masathon() {
                             </p>
                         </div>
 
+                        <div className="ma-hero-result ma-reveal">
+                            <div className="ma-hero-result-copy">
+                                <span className="ma-blink">★ ROUND 1 RESULTS ARE LIVE</span>
+                                <strong>34 TEAMS ADVANCE TO ROUND 2</strong>
+                            </div>
+                            <button type="button" className="ma-btn ma-btn-green ma-btn-sm" onClick={() => goTo('shortlist')}>
+                                VIEW SHORTLIST &#9654;
+                            </button>
+                        </div>
+
                         {/* facts, visible immediately — no clicking required */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4" style={{ margin: '38px 0 34px' }}>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4" style={{ margin: '34px 0' }}>
                             {KEY_FACTS.map((f) => (
                                 <div key={f.k} className="ma-panel" style={{ ['--accent']: '#fbd000', padding: '18px 12px' }}>
                                     <span className="ma-kicker" style={{ ['--accent']: '#43b047' }}>
@@ -718,6 +730,19 @@ export default function Masathon() {
                                 );
                             })}
                         </div>
+                    </div>
+                </section>
+
+                {/* ══════════════ ROUND 2 SHORTLIST ══════════════ */}
+                <section id="shortlist" className="ma-section ma-shortlist-section" style={{ scrollMarginTop: 120 }}>
+                    <div className="max-w-7xl mx-auto px-4">
+                        <SectionHead
+                            world="ROUND 1 CLEAR"
+                            title="ROUND 2 SHORTLIST"
+                            sub="THE RESULTS ARE IN. 34 TEAMS HAVE UNLOCKED THE NEXT LEVEL."
+                            coinSlot={coinFor('shortlist')}
+                        />
+                        <ShortlistedTeams play={play} />
                     </div>
                 </section>
 
