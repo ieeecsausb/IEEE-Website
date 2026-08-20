@@ -8,7 +8,13 @@
    differ only by their accent colour.
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("/fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
 
 .ma-root {
   --ma-gold: #fbd000;
@@ -529,6 +535,446 @@
   display: flex;
   width: max-content;
   animation: ma-marquee 26s linear infinite;
+}
+
+/* ---------- Round 2 results ---------- */
+.ma-hero-result {
+  width: min(760px, 100%);
+  margin: 32px auto 0;
+  padding: 16px 18px;
+  background: #090911;
+  border-top: 6px solid var(--ma-gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  box-shadow:
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000,
+    10px 10px 0 rgba(0, 0, 0, 0.22);
+}
+.ma-hero-result-copy {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+}
+.ma-hero-result-copy span {
+  color: var(--ma-gold);
+  font-size: 7px;
+}
+.ma-hero-result-copy strong {
+  color: #fff;
+  font-size: clamp(9px, 1.8vw, 13px);
+  line-height: 1.8;
+}
+
+.ma-shortlist-section {
+  isolation: isolate;
+}
+.ma-shortlist-section::before {
+  content: "";
+  position: absolute;
+  inset: 4% 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 15%, rgba(251, 208, 0, 0.22) 0 3px, transparent 4px),
+    radial-gradient(circle at 92% 35%, rgba(255, 43, 209, 0.18) 0 3px, transparent 4px),
+    radial-gradient(circle at 15% 78%, rgba(67, 176, 71, 0.2) 0 3px, transparent 4px),
+    radial-gradient(circle at 86% 88%, rgba(0, 229, 255, 0.18) 0 3px, transparent 4px);
+  background-size: 92px 92px, 128px 128px, 116px 116px, 150px 150px;
+}
+.ma-shortlist-shell {
+  position: relative;
+}
+.ma-result-banner {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(16px, 3vw, 30px);
+  padding: clamp(22px, 4vw, 34px);
+  background: #10101b;
+  border: 6px solid #000;
+  border-top-color: var(--ma-gold);
+  box-shadow:
+    inset 0 0 0 4px #29293a,
+    12px 12px 0 rgba(0, 0, 0, 0.25);
+}
+.ma-result-banner::after {
+  content: "";
+  position: absolute;
+  right: -44px;
+  top: -44px;
+  width: 150px;
+  height: 150px;
+  opacity: 0.16;
+  transform: rotate(45deg);
+  background: repeating-linear-gradient(90deg, #fbd000 0 12px, transparent 12px 24px);
+}
+.ma-result-banner > * {
+  position: relative;
+  z-index: 1;
+}
+.ma-result-banner span {
+  display: block;
+  margin-bottom: 13px;
+  color: var(--ma-green);
+  font-size: 8px;
+}
+.ma-result-banner strong {
+  display: block;
+  color: var(--ma-gold);
+  font-size: clamp(13px, 2.7vw, 23px);
+  line-height: 1.65;
+  text-shadow: 3px 3px 0 #000;
+}
+.ma-result-banner p {
+  margin: 14px 0 0;
+  color: var(--ma-body);
+  font-size: 8px;
+  line-height: 2.1;
+}
+.ma-result-banner-icon {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  background: #000;
+  border: 4px solid #323244;
+}
+
+.ma-result-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.ma-result-stat {
+  position: relative;
+  min-width: 0;
+  padding: 19px 12px 17px;
+  overflow: hidden;
+  text-align: center;
+  background: #0c0c14;
+  border: 4px solid #000;
+  border-top-color: var(--stat);
+  box-shadow: inset 0 -4px 0 #191925;
+}
+.ma-result-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--stat);
+  box-shadow: calc(100% - 8px) 0 0 var(--stat);
+}
+.ma-result-stat span,
+.ma-result-stat small {
+  display: block;
+  color: var(--ma-muted);
+  font-size: 6.5px;
+  line-height: 1.6;
+}
+.ma-result-stat strong {
+  display: block;
+  margin: 12px 0 8px;
+  color: var(--stat);
+  font-size: clamp(18px, 3vw, 27px);
+  line-height: 1;
+  text-shadow: 2px 2px 0 #000;
+}
+.ma-result-stat strong.ma-result-date {
+  font-size: clamp(14px, 2.5vw, 22px);
+}
+
+.ma-roster-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 22px;
+  background: #0a0a11;
+  border: 4px solid #000;
+  border-bottom: 0;
+}
+.ma-roster-eyebrow {
+  display: block;
+  color: #fff;
+  font-size: 9px;
+  line-height: 1.8;
+}
+.ma-roster-toolbar p {
+  margin: 8px 0 0;
+  color: var(--ma-muted);
+  font-size: 6.5px;
+  line-height: 1.5;
+}
+.ma-result-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.ma-result-filter {
+  padding: 9px 10px;
+  color: #d7d7e2;
+  font-family: inherit;
+  font-size: 6.5px;
+  line-height: 1.3;
+  background: #1b1b28;
+  border: 3px solid #363647;
+  cursor: pointer;
+  transition:
+    color 0.12s,
+    background 0.12s,
+    border-color 0.12s,
+    transform 0.12s steps(2, end);
+}
+.ma-result-filter:hover,
+.ma-result-filter[data-active="true"] {
+  color: #050509;
+  background: var(--filter);
+  border-color: #000;
+  transform: translateY(-2px);
+}
+.ma-result-filter:focus-visible {
+  outline: 4px solid #fff;
+  outline-offset: 3px;
+}
+
+.ma-roster-frame {
+  overflow: hidden;
+  background: #0c0c14;
+  border: 4px solid #000;
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.24);
+}
+.ma-roster-header {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 78px;
+  gap: 12px;
+  padding: 12px 14px;
+  color: #050509;
+  font-size: 6.5px;
+  line-height: 1.4;
+  background: var(--ma-gold);
+  border-bottom: 4px solid #000;
+}
+.ma-roster-header span:last-child {
+  text-align: right;
+}
+.ma-roster-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  animation: ma-roster-in 0.28s steps(4, end) both;
+}
+@keyframes ma-roster-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ma-roster-column {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ma-roster-column + .ma-roster-column {
+  border-left: 4px solid #000;
+}
+.ma-roster-row {
+  --domain: #fbd000;
+  position: relative;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 122px;
+  padding: 19px 17px 19px 13px;
+  background: #101019;
+  border-bottom: 3px solid #292936;
+  transition:
+    background 0.14s,
+    transform 0.14s steps(2, end);
+}
+.ma-roster-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--domain);
+  opacity: 0.78;
+}
+.ma-roster-row:hover {
+  z-index: 2;
+  background: #1a1a26;
+  transform: translateX(4px);
+}
+.ma-roster-column .ma-roster-row:last-child {
+  border-bottom: 0;
+}
+.ma-roster-rank {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: var(--domain);
+  font-size: 8px;
+  line-height: 1;
+  background: #000;
+  border: 3px solid #333342;
+}
+.ma-roster-copy {
+  display: grid;
+  min-width: 0;
+  gap: 11px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.ma-roster-copy strong {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.ma-roster-college {
+  display: block;
+  min-width: 0;
+  color: #e0e0ea;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.ma-domain-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 58px;
+  padding: 7px 6px;
+  color: var(--domain);
+  font-size: 6px;
+  line-height: 1;
+  background: #050509;
+  border: 2px solid var(--domain);
+}
+.ma-roster-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 18px;
+  color: #050509;
+  font-size: 6.5px;
+  line-height: 1.7;
+  background: var(--ma-gold);
+  border-top: 4px solid #000;
+}
+.ma-shortlist-note {
+  width: fit-content;
+  max-width: 100%;
+  margin: 28px auto 0;
+  padding: 12px 15px;
+  color: #fff;
+  font-size: 7px;
+  line-height: 2;
+  text-align: center;
+  background: rgba(5, 5, 9, 0.82);
+  border: 3px solid #000;
+}
+
+@media (max-width: 767px) {
+  .ma-hero-result {
+    align-items: stretch;
+    flex-direction: column;
+    text-align: center;
+  }
+  .ma-hero-result .ma-btn {
+    width: 100%;
+  }
+  .ma-result-banner {
+    grid-template-columns: auto 1fr;
+  }
+  .ma-result-banner-icon {
+    width: 62px;
+    height: 62px;
+  }
+  .ma-result-banner-icon-end {
+    display: none;
+  }
+  .ma-result-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ma-roster-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .ma-result-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ma-result-filter {
+    padding-inline: 4px;
+  }
+  .ma-roster-grid {
+    grid-template-columns: 1fr;
+  }
+  .ma-roster-column + .ma-roster-column {
+    border-top: 4px solid #000;
+    border-left: 0;
+  }
+  .ma-roster-footer {
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .ma-result-banner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .ma-result-banner-icon {
+    margin: 0 auto;
+  }
+  .ma-roster-header {
+    display: none;
+  }
+  .ma-roster-row {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 9px;
+    min-height: 100px;
+    padding-right: 9px;
+  }
+  .ma-roster-copy strong {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .ma-roster-college {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .ma-domain-tag {
+    grid-column: 2;
+    justify-self: start;
+  }
 }
 
 /* ---------- Buttons ---------- */
